@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 import { HomeComponent } from './components/home/home.component';
 
 
