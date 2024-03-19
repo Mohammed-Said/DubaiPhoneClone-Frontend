@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <h3>Shop by category</h3>
+</div>
+<app-card-slider >
+  @for (item of Categories; track item.id;let i=$index) {
+  <li class="list-unstyled item">
+    <a href="#" draggable="false">
+      <img draggable="false" src="/assets/Images/Categories/{{ item.image }}" [alt]="item.name" />
+      <span class="d-block">{{ item.name + (i+1)  }}</span>
+    </a>
+  </li>
+  }
+</app-card-slider>

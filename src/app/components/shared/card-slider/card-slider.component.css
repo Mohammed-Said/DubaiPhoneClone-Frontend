@@ -1,0 +1,111 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.wrapper {
+  width: 95%;
+  /* overflow: hidden; */
+  padding-block:50px ;
+  margin: auto;
+  position: relative;
+
+}
+
+.left-arrow
+,.right-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: 1px solid #989898;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+.left-arrow:hover
+,.right-arrow:hover {
+  border-color: #4d4d4d !important;
+}
+.left-arrow{
+  left: -20px;
+}
+.right-arrow{
+  right: -20px;
+
+}
+.wrapper .inf-carousel{
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: flex-start;
+  /* padding-right:1px ; */
+  /* grid-auto-columns: calc((100% / 8) - 16px); */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 16px;
+  user-select: none;
+  border-radius: 8px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0;
+}
+
+.inf-carousel::-webkit-scrollbar {
+  display: none;
+}
+.inf-carousel.no-transition {
+  scroll-behavior: auto;
+}
+.inf-carousel.dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+.inf-carousel.dragging .item {
+  cursor: grab;
+  user-select: none;
+}
+
+
+/* @media screen and (max-width: 1200px) {
+  .wrapper{
+    max-width: 1000px;
+
+  }
+  .wrapper .inf-carousel {
+    grid-auto-columns: calc((100% / 6) - 16px);
+  }
+}
+@media screen and (max-width: 992px) {
+  .wrapper{
+    max-width: 850px;
+
+  }
+  .wrapper .inf-carousel {
+    grid-auto-columns: calc((100% / 4) - 16px);
+
+  }
+
+} */
+@media screen and (max-width: 768px) {
+  /* .wrapper{
+    max-width: 700px;
+  }
+  .wrapper .inf-carousel {
+    grid-auto-columns: calc((100% / 3) );
+
+  } */
+
+  .left-arrow
+  ,.right-arrow {
+    display: none;
+  }
+}
+

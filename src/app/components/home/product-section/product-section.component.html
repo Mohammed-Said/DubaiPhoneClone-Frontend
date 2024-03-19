@@ -1,0 +1,19 @@
+<div class="mx-auto mx-5 position-relative mt-5 py-5">
+  <div class="container">
+
+    <h3 class="fw-semibold">{{title}}</h3>
+    <a href="#">
+      <img class="w-100" src="assets/Images/{{imagePath}}" alt="hurry-up">
+    </a>
+  </div>
+  <app-card-slider [isAutoPlay]="false">
+    @for (item of products; track item.id;let i=$index) {
+      <li class="list-unstyled item">
+        <app-card></app-card>
+      </li>
+      }
+  </app-card-slider>
+  <div class="btn px-3 my-4 mx-auto text-center d-flex justify-content-center" >
+    <a class="primary-btn" href="#">Shop All {{title}}</a>
+  </div>
+</div>
