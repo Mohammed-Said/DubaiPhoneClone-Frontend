@@ -9,20 +9,20 @@
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username *</label>
                     <input type="text" formControlName="Username" class="form-control rounded-pill" name="username"
-                      
+                    [ngClass]="{'is-invalid':(!Username?.touched||!Username?.dirty) && Username?.invalid}"  
                      aria-describedby="emailHelp" placeholder="Username">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address *</label>
                     <input type="email" formControlName="Email" class="form-control rounded-pill" name="email"
-                     
+                    [ngClass]="{'is-invalid':(!Email?.touched || !Email?.dirty) && Email?.invalid}"  
                      aria-describedby="emailHelp" placeholder="Email">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password*</label>
                     <input type="password" formControlName="password" class="form-control rounded-pill" name="password"
-                      id="exampleInputPassword1" placeholder="password"> 
-                    
+                      id="exampleInputPassword1" placeholder="password" 
+                      [ngClass]="{'is-invalid':(!password?.touched || !password?.dirty) && password?.invalid}">
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary rounded-pill text-centre" (click)="save(signform)">Create Account</button>
