@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { CardSliderComponent } from '../card-slider/card-slider.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [CardSliderComponent],
+  imports: [CardSliderComponent,CommonModule],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css'
 })
 export class BrandsComponent {
   brands: any ;
+  @Input() isSmall=false;
 
   ngOnInit(): void {
-
     this.brands=[
       {
         "id": 1,

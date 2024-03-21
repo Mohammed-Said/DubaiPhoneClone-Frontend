@@ -7,3 +7,14 @@ body{
   font-family: "Manrope", sans-serif;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+background-color: #F0F3F4; }
+p-dropdown > div{
+  border-radius: 200px;
+  width: 300px;
+}
+p-dropdown  ul{
+  padding-left: 0px;
+}

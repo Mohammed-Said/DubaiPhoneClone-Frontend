@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -12,7 +13,7 @@ import {
 @Component({
   selector: 'app-card-slider',
   standalone: true,
-  imports: [CardSliderComponent],
+  imports: [CardSliderComponent,CommonModule],
   templateUrl: './card-slider.component.html',
   styleUrl: './card-slider.component.css',
 })
@@ -31,6 +32,7 @@ export class CardSliderComponent implements AfterViewInit, OnDestroy {
 
   isDragging = false;
   @Input() isAutoPlay : boolean=true;
+  @Input() isSmall: boolean=false;
   startX!: number;
   startScrollLeft!: number;
   timeoutId: any;

@@ -1,10 +1,10 @@
 <div class="container mt-5">
   <h3>Shop by brands</h3>
 </div>
-<app-card-slider  class="brand">
+<app-card-slider  class="brand" [isSmall]="isSmall" >
   @for (item of brands; track item.id;let i=$index) {
-    <li class="list-unstyled item">
-      <a href="#" draggable="false">
+    <li class="list-unstyled item" >
+      <a href="#" draggable="false" [ngClass]="{'small': isSmall}">
         <img draggable="false" src="/assets/Images/brands/{{ item.image }}" [alt]="item.name" class="w-100"/>
       </a>
     </li>

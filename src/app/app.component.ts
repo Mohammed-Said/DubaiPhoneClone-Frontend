@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, SimpleChanges, ViewChild 
 import { RouterOutlet } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
+import { ProductsPageComponent } from "./components/products-page/products-page.component";
 
 
 @Component({
@@ -9,7 +10,7 @@ import { HomeComponent } from './components/home/home.component';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet,HomeComponent]
+    imports: [RouterOutlet, HomeComponent, ProductsPageComponent]
 })
 export class AppComponent {
   title = 'DubaiPhoneClone';
