@@ -1,13 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
-@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-/* @import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.css"; */
-
-body{
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+body {
   font-family: "Manrope", sans-serif;
 }
 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f0f3f4;
+}
+p-dropdown > div {
+  border-radius: 200px;
+  width: 300px;
+}
+p-dropdown ul {
+  padding-left: 0px;
+}
 

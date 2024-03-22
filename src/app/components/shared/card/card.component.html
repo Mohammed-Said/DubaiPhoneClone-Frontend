@@ -1,14 +1,17 @@
-<div class="prdCard">
+<div class="prdCard" [ngClass]="{'grid-one': isGridOne}">
   <div class="card-label">
     <p class="m-0">Sale!</p>
   </div>
-  <div class="card-img w-100">
-
-      <img src="assets/Images/Apple-IPhone-14-Plus-With-FaceTime-128GB-6GB-RAM_Apple_3913_2-441x441.jpeg" alt="" />
-
+  <div class="card-img">
+    <img
+      src="assets/Images/Apple-IPhone-14-Plus-With-FaceTime-128GB-6GB-RAM_Apple_3913_2-441x441.jpeg"
+      alt=""
+    />
   </div>
   <div class="card-content">
-    <p class="text-black fw-semibold">Apple-IPhone-14-Plus-With-FaceTime-128GB-6GB-RAM_Apple</p>
+    <p class="text-black fw-semibold">
+      Apple-IPhone-14-Plus-With-FaceTime-128GB-6GB-RAM_Apple
+    </p>
     <div class="d-flex flex-column g-1">
       <div class="price">
         <ins class="highlight">
@@ -25,9 +28,9 @@
         </del>
       </div>
     </div>
-    <div class="g-3 d-flex w-100 align-items-center justify-content-center btn">
+    <div class="card-btn">
       <a href="#">
-        <img class="d-block" src="assets/Images/cart.svg" alt="cart">
+        <img class="d-block" src="assets/Images/cart.svg" alt="cart" />
         <span>Add To Cart</span>
       </a>
     </div>

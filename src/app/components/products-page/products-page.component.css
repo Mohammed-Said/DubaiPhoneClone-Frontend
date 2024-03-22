@@ -1,0 +1,41 @@
+.page-grid{
+  display: grid;
+    grid-template-columns: 1fr 3fr ;
+    grid-gap: 4.5rem ;
+    margin-bottom: 4rem;
+}
+
+p{
+  font-size: 14px;
+}
+.img-icon{
+  border: 1px solid #4d4d4d;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+.img-icon:hover{
+  background-color: #eef0f2;
+}
+.products-grid {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  margin-top: 2rem;
+}
+.products-grid-one{
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1.4rem;
+  margin-top: 2rem;
+}
+
+
