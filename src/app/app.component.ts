@@ -10,7 +10,7 @@ import { BottomFootetrComponent } from './components/bottom-footetr/bottom-foote
 import { CartComponent } from './companent/cart/cart/cart.component';
 import { DetailsComponent } from './companent/details/details/details.component';
 import { GalleriaBasicDemoComponent } from './companent/test/galleria-basic-demo/galleria-basic-demo.component';
-
+import { HeaderComponent } from './components/header/header.component';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { GalleriaBasicDemoComponent } from './companent/test/galleria-basic-demo
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, HomeComponent, ProductsPageComponent,BottomFootetrComponent,MatSlideToggleModule,RouterModule,CartComponent,DetailsComponent,GalleriaBasicDemoComponent]
+    imports: [RouterOutlet, HomeComponent, ProductsPageComponent,BottomFootetrComponent,MatSlideToggleModule,RouterModule,CartComponent,DetailsComponent,GalleriaBasicDemoComponent , HeaderComponent]
 
 })
 export class AppComponent {

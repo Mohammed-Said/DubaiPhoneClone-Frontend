@@ -1,0 +1,121 @@
+<nav class="navbar navbar-expand-lg navbar-light p1" >
+  <div class="container-fluid">
+    <a class="navbar-brand fs-6" href="#">
+      <i class="fa fa-solid fa-truck fa-flip-horizontal"></i>
+        Free Delivery on Orders over <span class="fs-6 text fw-medium">500 EGP</span>
+    </a>
+
+
+      <div class="fw-medium navbar-nav ms-auto ">
+        <a class="nav-link" href="tel:15254">
+          <i class="fa fa-solid fa-phone"></i>
+          15254
+        </a>
+        <a class="nav-link" href="whatsapp://send?phone=+20 110 043 2184">
+          <i class="fa fa-brands fa-whatsapp" id="whatsapp"></i>
+          Whatsapp Support
+        </a>
+        <a class="nav-link" href="#">
+          <i class="material-icons">storefront</i>
+          Store Locator
+        </a>
+        <a class="nav-link" href="#">
+          <i class="material-icons">|</i>
+          العربية
+        </a>
+      </div>
+    </div>
+
+</nav>
+<nav class="navbar navbar-expand-lg p2" >
+  <div class="container-fluid">
+    <a class="navbar-brand fs-3" href="#">
+      <img src="../../../assets/dubai-logo-svg.svg">
+    </a>
+    <div class="search-bar s">
+      <i class="fa fa-search" id="search"></i>
+      <input type="text" placeholder="Search products...">
+    </div>
+  <button type="button" class="btn btn-primary custom-button">
+      <i class="material-icons button-icon">person</i>
+      Login
+  </button>
+
+  <button type="button" class="btn btn-primary custom-button">
+    <i class="fa fa-solid fa-cart-plus  button-icon"></i>
+    Cart<span class="fs-6 text fw-medium px-2"> ({{ cartCount}})</span>
+</button>
+  </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light p3" >
+  <div class="container-fluid">
+    <a class="text-danger fw-medium nav-link">
+      <img src="../../../assets/last-piece.svg">
+      Last Piece
+    </a>
+
+    <!--=============== Dropdown ============================ -->
+    <div class="Filter">
+
+      <button mat-button [matMenuTriggerFor]="mobileMenu">Mobiles & Tablets</button>
+      <mat-menu #mobileMenu="matMenu" yPosition="below" class="g">
+
+        <div class="grid text-center">
+          <div class="menu-column">
+          <span class="menu-heading">Mobiles</span>
+          @for (item of mobiles; track $index) {
+          <button mat-menu-item class="dropdown-items"> {{ item }} </button>
+        }
+        </div>
+
+        <div class="menu-column">
+          <span class="menu-heading">Tablets</span>
+          @for (item of tablets; track $index) {
+          <button mat-menu-item class="dropdown-items"> {{ item }} </button>
+
+        }
+        </div>
+        </div>
+
+
+      </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">Laptops & Printers</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>    <button mat-button [matMenuTriggerFor]="belowMenu">TVs & Monitors</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">Gaming</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">Accessories</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">Home Appliances</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">Brand</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+    </div>
+</div>
+
+</nav>
