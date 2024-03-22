@@ -1,80 +1,21 @@
 import { Component,Input } from '@angular/core';
 import { CardSliderComponent } from '../card-slider/card-slider.component';
 import { CommonModule } from '@angular/common';
+import { IBrand } from '../../../Models/ibrand';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [CardSliderComponent,CommonModule],
+  imports: [CardSliderComponent,CommonModule,RouterModule],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css'
 })
 export class BrandsComponent {
-  brands: any ;
+  @Input() brands: IBrand[]=[] ;
   @Input() isSmall=false;
 
   ngOnInit(): void {
-    this.brands=[
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "apple-new-1.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "xiaomi-new.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "asus-new.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "honor.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "hp-new.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "huawei-new.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "lenovo-new.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "oppo-new.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "realme-logo-1-1.png",
-      },
-      {
-        "id": 1,
-        "name": "Best Seller",
-        "arabicName": "Electronics",
-        "image": "xiaomi-new.png",
-      },
-    ]
+
   }
 }
