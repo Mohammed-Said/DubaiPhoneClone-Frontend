@@ -71,7 +71,7 @@ export class CardSliderComponent implements AfterViewInit, OnDestroy {
     ) {
       this.carousel.nativeElement.classList.add('no-transition');
       this.carousel.nativeElement.scrollLeft =
-        this.carousel.nativeElement.offsetWidth;
+        this.carousel.nativeElement?.offsetWidth;
       this.carousel.nativeElement.classList.remove('no-transition');
     }
     clearTimeout(this.timeoutId);
@@ -80,7 +80,7 @@ export class CardSliderComponent implements AfterViewInit, OnDestroy {
   autoPlay()  {
     const firstCardWidth =
       (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
-        .offsetWidth ?? 0;
+        ?.offsetWidth ?? 0;
 
     if(!this.isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
     // Autoplay the carousel after every 2500 ms
@@ -90,7 +90,7 @@ export class CardSliderComponent implements AfterViewInit, OnDestroy {
   arrowClick(e: Event) {
     const firstCardWidth =
       (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
-        .offsetWidth ?? 0;
+        ?.offsetWidth ?? 0;
 
     this.carousel.nativeElement.scrollLeft +=
       (e.target as HTMLElement).id == 'left'

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CardComponent } from '../../shared/card/card.component';
 import { CardSliderComponent } from '../../shared/card-slider/card-slider.component';
+import { IProduct } from '../../../Models/iproduct';
 
 @Component({
   selector: 'app-product-section',
@@ -12,5 +13,5 @@ import { CardSliderComponent } from '../../shared/card-slider/card-slider.compon
 export class ProductSectionComponent {
 @Input() imagePath!:string;
 @Input() title!:string;
-@Input() products:any=[1,2,3,4,5,6,7,8,9,10];
+@Input() products!:IProduct[];
 }

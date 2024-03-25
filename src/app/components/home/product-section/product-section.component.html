@@ -1,15 +1,15 @@
 <div class="mx-auto mx-5 position-relative mt-5 py-5">
-  <div class="container">
+  <div class="container mb-5 pb-5">
 
-    <h3 class="fw-semibold">{{title}}</h3>
+    <h3 class="fw-semibold fs-2">{{title}}</h3>
     <a href="#">
       <img class="w-100" src="assets/Images/{{imagePath}}" alt="hurry-up">
     </a>
   </div>
-  <app-card-slider [isAutoPlay]="false">
-    @for (item of products; track item.id;let i=$index) {
+  <app-card-slider [isAutoPlay]="false" class="pt-5" >
+    @for (prod of products; track prod.id;let i=$index) {
       <li class="list-unstyled item">
-        <app-card></app-card>
+        <app-card [product]="prod"></app-card>
       </li>
       }
   </app-card-slider>

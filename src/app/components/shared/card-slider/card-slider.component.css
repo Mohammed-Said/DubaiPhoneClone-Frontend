@@ -6,9 +6,9 @@
   font-family: "Poppins", sans-serif;
 }
 .wrapper {
-  width: 95%;
+  width: 97%;
   /* overflow: hidden; */
-  padding-block:50px ;
+  /* padding-block:50px ; */
   margin: auto;
   position: relative;
 
@@ -74,7 +74,7 @@
 }
 
 .small{
-  margin-inline: 100px;
+  /* margin-inline: 100px; */
 }
 /* @media screen and (max-width: 1200px) {
   .wrapper{

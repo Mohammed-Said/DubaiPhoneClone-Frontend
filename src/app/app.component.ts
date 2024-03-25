@@ -7,10 +7,11 @@ import { ProductsPageComponent } from "./components/products-page/products-page.
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BottomFootetrComponent } from './components/bottom-footetr/bottom-footetr.component';
 
-import { CartComponent } from './companent/cart/cart/cart.component';
-import { DetailsComponent } from './companent/details/details/details.component';
-import { GalleriaBasicDemoComponent } from './companent/test/galleria-basic-demo/galleria-basic-demo.component';
-import { HeaderComponent } from './components/header/header.component';
+import { DetailsComponent } from './components/shared/details/details/details.component';
+import { HeaderComponent } from "./components/header/header.component";
+import { CartComponent } from "./components/cart/cart/cart.component";
+
+
 
 
 @Component({
@@ -18,7 +19,7 @@ import { HeaderComponent } from './components/header/header.component';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, HomeComponent, ProductsPageComponent,BottomFootetrComponent,MatSlideToggleModule,RouterModule,CartComponent,DetailsComponent,GalleriaBasicDemoComponent , HeaderComponent]
+    imports: [RouterOutlet, HomeComponent, ProductsPageComponent, BottomFootetrComponent, MatSlideToggleModule, RouterModule, DetailsComponent, HeaderComponent, CartComponent]
 
 })
 export class AppComponent {

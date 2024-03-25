@@ -1,6 +1,6 @@
 <div class="wrapper">
 
-  <app-categories></app-categories>
+  <app-categories [Categories]="Categories"></app-categories>
   <section>
     <div class="container mx-auto mx-5 position-relative">
       <a href="#">
@@ -8,11 +8,12 @@
       </a>
     </div>
   </section>
-  <app-brands></app-brands>
-  <app-product-section imagePath="newArrival.webp" title="New Arrivals" ></app-product-section>
-  <app-product-section imagePath="apple-sec.webp" title="Apple" ></app-product-section>
-  <app-product-section imagePath="laptopSec.webp" title="Laptops" ></app-product-section>
-  <app-product-section imagePath="WatchSec.webp" title="Smart Watch" ></app-product-section>
-  <app-product-section imagePath="homeSec.webp" title="Home Appliances" ></app-product-section>
-  <app-product-section imagePath="sound.webp" title="Sound" ></app-product-section>
+  <app-brands [brands]="Brands"></app-brands>
+  <app-product-section [products]="Products" imagePath="newArrival.webp" title="New Arrivals" ></app-product-section>
+  <app-product-section [products]="Products" imagePath="apple-sec.webp" title="Apple" ></app-product-section>
+  <app-product-section [products]="Products" imagePath="laptopSec.webp" title="Laptops" ></app-product-section>
+  <app-product-section [products]="Products" imagePath="WatchSec.webp" title="Smart Watch" ></app-product-section>
+  <app-product-section [products]="Products" imagePath="homeSec.webp" title="Home Appliances" ></app-product-section>
+  <app-product-section [products]="Products" imagePath="sound.webp" title="Sound" ></app-product-section>
+  <app-left-side></app-left-side>
 </div>

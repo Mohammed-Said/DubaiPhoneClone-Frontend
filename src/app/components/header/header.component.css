@@ -88,7 +88,8 @@ i{
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two columns, each taking up equal space */
   grid-gap: 20px; /* Gap between grid items */
-  width: 100vw; /
+  width: 100vw;
+
 }
 
 .menu-column {
@@ -102,3 +103,4 @@ i{
 .dropdown-items {
   /* Add your styles for the dropdown items */
 }
+

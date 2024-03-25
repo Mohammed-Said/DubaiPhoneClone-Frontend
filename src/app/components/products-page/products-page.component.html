@@ -1,41 +1,134 @@
-
-<section>
+<section class="mt-4">
   <div class="container">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" class="fs-6">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a class="nav-link" href="#">{{mainUrl}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{subUrl}}</li>
+        <li class="breadcrumb-item"><a
+          [routerLink]="['/']"
+          routerLinkActive="router-link-active"
+          class="text-dark text-decoration-none"
+          >Home</a></li>
+        <li class="breadcrumb-item">
+          <a
+            [routerLink]="['/',mainUrl]"
+            routerLinkActive="router-link-active"
+            class="text-dark text-decoration-none"
+            >{{ mainUrl }}</a
+          >
+        </li>
+        @if (SecondPartUrl===undefined) {
+        <li class="breadcrumb-item active">
+         {{ firstPartUrl }}
+        </li>
+        }@else {
+        <li class="breadcrumb-item">
+          <a
+            [routerLink]="['/',mainUrl, firstPartUrl]"
+            routerLinkActive="router-link-active"
+            class="text-dark text-decoration-none"
+          >
+            {{ firstPartUrl }}
+          </a>
+        </li>
+        <li
+          class="breadcrumb-item active"
+          aria-current="page"
+        >
+
+            {{ SecondPartUrl }}
+        </li>
+        }
       </ol>
     </nav>
   </div>
 </section>
-<main>
-  <div class="page-header text-center">
-    <app-brands  [isSmall]="true"[brands]="brands"></app-brands>
-    <app-categories [Categories]="categories"></app-categories>
+<main class="pt-1">
+  <div class="page-header fs-2">
+    <app-brands  [isSmall]="true" [brands]="brands"></app-brands>
+    <!-- <app-categories [Categories]="categories"></app-categories> -->
   </div>
-  <div class="container mx-auto">
-    <div class="page-grid" >
-      <div class="filters">Filter By</div>
+  <div class="container mx-auto mt-5">
+    <div class="page-grid pt-5">
+      <div class="filters">
+        <h2>Filter By</h2>
+        <div class="stock-filter py-5">
+          <h3>Stock Status</h3>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button [color]="" value="1">Show All</mat-radio-button>
+            <mat-radio-button value="2">In Stock</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="price-filter">
+          <h3>Price</h3>
+          <mat-slider color="secondary" min="0" max="500" class="w-100" >
+            <input value="300" matSliderStartThumb #min>
+            <input value="400" matSliderEndThumb #max>
+          </mat-slider>
+          <div class="d-flex slider-input gx-3 mt-4">
+            <input class="mr-3" type="number" [(value)]="min.value" >
+            <input type="number" [(value)]="max.value" >
+          </div>
+          <div class="range-label mt-4">
+            <span>Price:</span>
+            <span>{{min.value}}</span>
+            <span> EGP - </span>
+            <span>{{max.value}}</span>
+            <span> EGP</span>
+          </div>
+        </div>
+        <div class="filter">
+          <h3>Brands</h3>
+          <div class="checkBoxs">
+            <mat-checkbox color="primary" class="example-margin">Check me!</mat-checkbox>
+          </div>
+        </div>
+      </div>
       <div>
         <div class="d-flex justify-content-between align-items-center">
-          <p class="m-0">Showing 1–12 of 87 results</p>
-          <div class="d-flex justify-content-between align-items-center ">
-            <div class="img-icon me-3 " (click)="handleGrid($event)">
-              <img src="assets/Images/filter.svg" alt="filter-icon" draggable="false">
+          <p class="m-0">Showing 1–9 of 87 results</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="img-icon me-3" (click)="handleGrid($event)">
+              <img
+                src="assets/Images/filter.svg"
+                alt="filter-icon"
+                draggable="false"
+              />
             </div>
-            <p-dropdown [options]="sorts" optionLabel="name" [showClear]="true" placeholder="Select a City" >
+            <p-dropdown
+              [options]="sorts"
+              optionLabel="name"
+              [(ngModel)]="selectedSort"
+              [showClear]="true"
+              placeholder="Sort By"
+              (onChange)="SortBy(selectedSort)"
+            >
             </p-dropdown>
 
           </div>
         </div>
         <div class="products-grid" #ProductGrid>
-          @for (item of products; track $index) {
-            <app-card [isGridOne]="!isFilter1"></app-card>
+          @for (prod of products; track $index) {
+          <app-card [isGridOne]="!isFilter1" [product]="prod"></app-card>
           }
         </div>
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center align-content-center mt-5 ">
+          <ul class="pagination pagination-lg">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
-</main>
 
+</main>
