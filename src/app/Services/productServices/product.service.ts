@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { environment } from '../../../environments/environment.development';
 import { IProduct } from '../../Models/iproduct';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
   private URL!:string
   constructor(private httpClient:HttpClient) {
     this.URL=environment.serverURL+"/api/product"
@@ -37,5 +40,7 @@ export class ProductService {
    }
    getProductsCountByBrand(id:number):Observable<IProduct[]>{
     return this.httpClient.get<IProduct[]>(this.URL+"/catCount/"+id)
+
    }
 }
+

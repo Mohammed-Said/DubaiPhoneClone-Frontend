@@ -89,6 +89,7 @@ i{
   grid-template-columns: repeat(2, 1fr); /* Two columns, each taking up equal space */
   grid-gap: 20px; /* Gap between grid items */
   width: 100vw;
+
 }
 
 .menu-column {
