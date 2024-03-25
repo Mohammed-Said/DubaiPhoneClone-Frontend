@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { CardComponent } from '../shared/card/card.component';
 import { BrandsComponent } from '../shared/brands/brands.component';
-import { ActivatedRoute, Router,  } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { IBrand } from '../../Models/ibrand';
 
@@ -10,37 +10,82 @@ import { ICategory } from '../../Models/icategory';
 import { BrandService } from '../../Services/brandServices/brand.service';
 import { CategoryService } from '../../Services/category.services/category.service';
 import { CategoriesComponent } from '../shared/categories/categories.component';
+import { ProductService } from '../../Services/productServices/product.service';
+import { IProduct } from '../../Models/iproduct';
+import {  FormsModule } from '@angular/forms';
+import { MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-products-page',
   standalone: true,
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.css',
-  imports: [DropdownModule, CardComponent, BrandsComponent, BrandsComponent,CategoriesComponent]
+  imports: [
+    DropdownModule,
+    CardComponent,
+    BrandsComponent,
+    BrandsComponent,
+    CategoriesComponent,
+    RouterModule,
+    FormsModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatCheckboxModule
+
+  ],
 })
 export class ProductsPageComponent implements OnInit {
   categories: ICategory[] = [];
   brands: IBrand[] = [];
   mainUrl: string = '';
-  subUrl: string = '';
+  firstPartUrl: string = '';
+  SecondPartUrl: string = '';
+  isFilter1 = true;
+  sorts: any[] = [
+    { name: 'Sort by price: low to high', value: 1 },
+    { name: 'Sort by price: High to low ', value: 2 },
+    { name: 'Sort by name: ascending', value: 3 },
+    { name: 'Sort by name: descending', value: 4 },
+  ];
+  stock!:string;
+  selectedSort!: string;
+  products: IProduct[] = [];
+  @ViewChild('ProductGrid') productGrid!: ElementRef;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private _brandService: BrandService,
-    private _categoryService: CategoryService
+    private _categoryService: CategoryService,
+    private _productService: ProductService
   ) {}
+
   ngOnInit() {
-    this.mainUrl = this.activatedRoute.snapshot.params['category'];
-    this.subUrl = this.activatedRoute.snapshot.params['brand'];
-    if(this.router.url.split('/')[1]==='categories'){
+
+
+    this.mainUrl = this.router.url.split('/')[1];
+
+    this._productService.getALLProducts().subscribe({
+      next: (prods) => {
+        console.log(prods);
+        this.products = prods;
+        console.log(this.products);
+        console.log(this.products[0].cover);
+      },
+    });
+
+    if (this.mainUrl === 'category') {
+      this.firstPartUrl = this.activatedRoute.snapshot.params['category'];
+      this.SecondPartUrl = this.activatedRoute.snapshot.params['brand'];
       this._brandService.getBrands().subscribe({
         next: (brands) => {
           this.brands = brands;
         },
       });
       this.routeCategoryCheck();
-    }else if(this.router.url.split('/')[1]==='brands')
-    {
+    } else if (this.mainUrl === 'brand') {
+      this.firstPartUrl = this.activatedRoute.snapshot.params['brand'];
       this._categoryService.getAllBrands().subscribe({
         next: (categories) => {
           this.categories = categories;
@@ -48,15 +93,10 @@ export class ProductsPageComponent implements OnInit {
       });
       this.routeBrandCheck();
     }
+    console.log(this.mainUrl);
+    console.log(this.firstPartUrl);
+    console.log(this.SecondPartUrl);
   }
-  isFilter1 = true;
-  sorts: any[] = [
-    { name: 'steak-0' },
-    { name: 'pizza-1' },
-    { name: 'tacos-2' },
-  ];
-  products: any = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  @ViewChild('ProductGrid') productGrid!: ElementRef;
 
   handleGrid(e: Event) {
     let img = ((e.target as HTMLElement).querySelector('img') ??
@@ -73,16 +113,17 @@ export class ProductsPageComponent implements OnInit {
 
   routeCategoryCheck() {
     let isCorrect = false;
-    if (this.mainUrl !== undefined && this.subUrl !== undefined) {
+    if (this.firstPartUrl !== undefined && this.SecondPartUrl !== undefined) {
       this._categoryService.getAllCategoriesWithBrands().subscribe({
         next: (categories: ICategory[]) => {
           categories.forEach((category: ICategory) => {
             if (
-              category.name.split(' ').join('').toLowerCase() === this.mainUrl
+              category.name.split(' ').join('').toLowerCase() ===
+              this.firstPartUrl
             ) {
               if (
                 category.brands?.some(
-                  (brands) => brands.toLowerCase() === this.subUrl
+                  (brands) => brands.toLowerCase() === this.SecondPartUrl
                 )
               )
                 isCorrect = true;
@@ -91,12 +132,13 @@ export class ProductsPageComponent implements OnInit {
           if (!isCorrect) this.router.navigate(['/NotFound']);
         },
       });
-    } else if (this.mainUrl !== undefined) {
+    } else if (this.firstPartUrl !== undefined) {
       this._categoryService.getAllCategoriesWithBrands().subscribe({
         next: (categories: ICategory[]) => {
           categories.forEach((category: ICategory) => {
             if (
-              category.name.split(' ').join('').toLowerCase() === this.mainUrl
+              category.name.split(' ').join('').toLowerCase() ===
+              this.firstPartUrl
             ) {
               isCorrect = true;
             }
@@ -108,28 +150,13 @@ export class ProductsPageComponent implements OnInit {
   }
   routeBrandCheck() {
     let isCorrect = false;
-    if (this.mainUrl !== undefined && this.subUrl !== undefined) {
+    if (this.firstPartUrl !== undefined) {
       this._brandService.GetAllBrandsWithCategories().subscribe({
         next: (brands: IBrand[]) => {
           brands.forEach((brand: IBrand) => {
-            if (brand.name.split(' ').join('').toLowerCase() === this.subUrl) {
-              if (
-                brand.categories?.some(
-                  (category) => category.toLowerCase() === this.mainUrl
-                )
-              )
-                isCorrect = true;
-            }
-          });
-          if (!isCorrect) this.router.navigate(['/NotFound']);
-        },
-      });
-    }
-    else if (this.mainUrl!== undefined) {
-    this._brandService.GetAllBrandsWithCategories().subscribe({
-        next: (brands: IBrand[]) => {
-          brands.forEach((brand: IBrand) => {
-            if (brand.name.split(' ').join('').toLowerCase() === this.mainUrl) {
+            if (
+              brand.name.split(' ').join('').toLowerCase() === this.firstPartUrl
+            ) {
               isCorrect = true;
             }
           });
@@ -137,6 +164,21 @@ export class ProductsPageComponent implements OnInit {
         },
       });
     }
-
+  }
+  SortBy(test: any) {
+    switch (test.value) {
+      case 1:
+        this.products.sort((a, b) => a.normalPrice - b.normalPrice);
+        break;
+      case 2:
+        this.products.sort((a, b) => b.normalPrice - a.normalPrice);
+        break;
+      case 3:
+        this.products.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 4:
+        this.products.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+    }
   }
 }

@@ -4,32 +4,32 @@
   </div>
   <div class="card-img">
     <img
-      src="assets/Images/Apple-IPhone-14-Plus-With-FaceTime-128GB-6GB-RAM_Apple_3913_2-441x441.jpeg"
-      alt=""
+      [src]="'assets/Images/Products/'+product.cover"
+      [alt]="product.name"
     />
   </div>
   <div class="card-content">
     <p class="text-black fw-semibold">
-      Apple-IPhone-14-Plus-With-FaceTime-128GB-6GB-RAM_Apple
+      {{product.name}}
     </p>
     <div class="d-flex flex-column g-1">
       <div class="price">
         <ins class="highlight">
           <span class="amount">
-            <bdi>1277</bdi>
+            <bdi>{{product.salePrice}}</bdi>
             <span> EGP</span>
           </span>
         </ins>
         <del class="strike">
           <span class="amount">
-            <bdi>1277</bdi>
+            <bdi>{{product.normalPrice}}</bdi>
             <span> EGP</span>
           </span>
         </del>
       </div>
     </div>
     <div class="card-btn">
-      <a href="#">
+      <a [routerLink]="['/product/'+ product.name.split(' ').join('-')]" [state]="{id:product.id}" routerLinkActive="router-link-active" >
         <img class="d-block" src="assets/Images/cart.svg" alt="cart" />
         <span>Add To Cart</span>
       </a>

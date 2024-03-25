@@ -1,0 +1,85 @@
+<section class="container bg-body-secondary p-2">
+    <h1>My Cart</h1>
+    <p>You have {{cartitems}} items in your cart </p>
+    <div class="d-flex ">
+        <div class="row col-8">
+            
+           <div class="item d-flex">
+
+                <div class="itemimg col-2">
+                    <img src={{imagelink}} 
+                    alt="" srcset="" width="100px" height="100px">
+                </div>
+                <div class="detalis col-6 ">
+                    <span>{{itemname}}</span>
+                    <span class="mx-3">{{price |currency:"EGP"}}</span>
+                    <p>QTY</p>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger">Remove <i class="bi bi-trash-fill"></i></button>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+           </div>
+           
+           <p>Want to have another look around? <a href=""> Continue Shopping</a></p>
+        </div>
+        <div class=" payment mx-4 col-4 bg-light d-flex flex-column  p-2">
+            <h3>Payment Summary</h3>
+            <div class="row flex-row  justify-content-between">
+                <div class="col-8">
+                    <span>Subtotal</span>
+                </div>
+                <div class="col-4">
+                    <b>{{price|currency}}</b>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <span>Shipping Fees</span>
+                </div>
+                <div class="col-6 ">
+                    <p>Calculated At Checkout</p>
+                </div>
+            </div>
+            <hr>
+            <p>Choose a store for picking up your order on the Checkout page.</p>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <span>Total</span>
+                </div>
+                <div class="col-6">
+                    <b class="text-primary">You save - {{price|currency:"EGP"}}</b>
+                </div>
+            </div>
+            <div class="row">
+                <p><a href=""> <i class="bi bi-ticket-perforated-fill"></i> Do You Have a Promocode?</a></p>
+            </div>
+            <div class="row p-2">
+                <button type="button" class="btn btn-primary rounded-pill w-80">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.9499 13.6401V14.6401C21.9499 14.9101 21.7399 15.1301 21.4599 15.1401H19.9999C19.4699 15.1401 18.9899 14.7501 18.9499 14.2301C18.9199 13.9201 19.0399 13.6301 19.2399 13.4301C19.4199 13.2401 19.6699 13.1401 19.9399 13.1401H21.4499C21.7399 13.1501 21.9499 13.3701 21.9499 13.6401Z" fill="white"></path>
+                        <path d="M18.4892 12.6901C17.9892 13.1801 17.7492 13.9101 17.9492 14.6701C18.2092 15.6001 19.1192 16.1901 20.0792 16.1901H20.9492C21.4992 16.1901 21.9492 16.6401 21.9492 17.1901V17.3801C21.9492 19.4501 20.2592 21.1401 18.1892 21.1401H6.70922C4.63922 21.1401 2.94922 19.4501 2.94922 17.3801V10.6501C2.94922 9.42014 3.53922 8.33014 4.44922 7.65014C5.07922 7.17014 5.85922 6.89014 6.70922 6.89014H18.1892C20.2592 6.89014 21.9492 8.58014 21.9492 10.6501V11.0901C21.9492 11.6401 21.4992 12.0901 20.9492 12.0901H19.9292C19.3692 12.0901 18.8592 12.3101 18.4892 12.6901Z" fill="white"></path>
+                        <path d="M16.6991 4.82C16.9691 5.09 16.7391 5.51 16.3591 5.51L8.67908 5.5C8.23908 5.5 8.00908 4.96 8.32908 4.65L9.94908 3.02C11.3191 1.66 13.5391 1.66 14.9091 3.02L16.6591 4.79C16.6691 4.8 16.6891 4.81 16.6991 4.82Z" fill="white"></path>
+                    </svg>
+                    Proceed to Secure Checkout    
+                </button>
+            </div>
+            
+            <div class="row">
+                <a href="">Return and Refund Policy</a>
+            </div>
+        </div>
+    </div>
+</section>
