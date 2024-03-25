@@ -2,12 +2,14 @@ import { AfterViewInit, Component, ElementRef, OnInit, SimpleChanges, ViewChild 
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
+
 import { ProductsPageComponent } from "./components/products-page/products-page.component";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BottomFootetrComponent } from './components/bottom-footetr/bottom-footetr.component';
 import { DetailsComponent } from './components/shared/details/details/details.component';
 import { HeaderComponent } from "./components/header/header.component";
 import { CartComponent } from "./components/cart/cart/cart.component";
+
 
 
 @Component({
