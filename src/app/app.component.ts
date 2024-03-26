@@ -7,9 +7,11 @@ import { ProductsPageComponent } from "./components/products-page/products-page.
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BottomFootetrComponent } from './components/bottom-footetr/bottom-footetr.component';
 
-import { DetailsComponent } from './components/shared/details/details/details.component';
+
 import { HeaderComponent } from "./components/header/header.component";
 import { CartComponent } from "./components/cart/cart/cart.component";
+import { DetailsComponent } from './components/details/details/details.component';
+import { SidenavAutosizeExampleComponent } from './components/shared/sidenav-autosize-example/sidenav-autosize-example.component';
 
 
 
@@ -19,7 +21,8 @@ import { CartComponent } from "./components/cart/cart/cart.component";
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, HomeComponent, ProductsPageComponent, BottomFootetrComponent, MatSlideToggleModule, RouterModule, DetailsComponent, HeaderComponent, CartComponent]
+    imports: [RouterOutlet, HomeComponent, ProductsPageComponent, BottomFootetrComponent, MatSlideToggleModule, RouterModule,
+       DetailsComponent, HeaderComponent, CartComponent,SidenavAutosizeExampleComponent]
 
 })
 export class AppComponent {

@@ -5,4 +5,5 @@ export interface IProduct {
   normalPrice :number
   salePrice :number
   cover:string
+  images?:string[]
 }
