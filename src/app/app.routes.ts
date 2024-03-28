@@ -6,7 +6,7 @@ import { NotFoundComponent } from './components/shared/not-found/not-found.compo
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
-import { DetailsComponent } from './components/shared/details/details/details.component';
+import { DetailsComponent } from './components/shared/details/details.component';
 
 export const routes: Routes = [
 

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CardComponent } from '../../shared/card/card.component';
 import { CardSliderComponent } from '../../shared/card-slider/card-slider.component';
-import { IProduct } from '../../../Models/iproduct';
+import { IProduct } from '../../../Models/product/iproduct';
+
 
 @Component({
   selector: 'app-product-section',

@@ -47,7 +47,7 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light p3">
+<nav class="navbar navbar-expand-lg navbar-light bg-light p3 position-relative">
   <div class="container-fluid">
     <a class="text-danger fw-medium nav-link">
       <img src="/assets/last-piece.svg" />
@@ -55,67 +55,248 @@
     </a>
 
     <!--=============== Dropdown ============================ -->
-    <div class="Filter">
-      <button mat-button [matMenuTriggerFor]="mobileMenu">
-        Mobiles & Tablets
-      </button>
-      <mat-menu #mobileMenu="matMenu" yPosition="below" class="g ">
-        <div class="grid text-center ">
-          <div class="menu-column">
-            <span class="menu-heading">Mobiles</span>
+    <div class="Filter ">
+
+      <button class="border-0 bg-transparent  toggle-btn" (click)="toggleDropdown($event)">Mobiles & Tablets<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
+      <div class="menu d-flex gap-5">
+        <div class="">
+          <h4 class="fw-semibold">Mobiles</h4>
+          <ul class="list-unstyled">
             @for (item of mobiles; track $index) {
-            <button mat-menu-item class="dropdown-items">{{ item }}</button>
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/mobile/'+item.toLowerCase()]"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
             }
-          </div>
-
-          <div class="menu-column">
-            <span class="menu-heading">Tablets</span>
-            @for (item of tablets; track $index) {
-            <button mat-menu-item class="dropdown-items">{{ item }}</button>
-
-            }
-          </div>
+          </ul>
         </div>
-      </mat-menu>
+        <div class="">
+          <h4 class="fw-semibold">Tablets</h4>
+          <ul class="list-unstyled">
+            @for (item of tablets; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/tablets/']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">
-        Laptops & Printers
-      </button>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
-      <button mat-button [matMenuTriggerFor]="belowMenu">TVs & Monitors</button>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
+      <button class="border-0 bg-transparent toggle-btn " (click)="toggleDropdown($event)">Laptops & Printers<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
+      <div class="menu d-flex gap-5">
+        <div class="">
+          <h4 class="fw-semibold">Laptops</h4>
+          <ul class="list-unstyled">
+            @for (item of laptop; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/laptop/'+item.toLowerCase()]"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }} Laptop</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="">
+          <h4 class="fw-semibold">Printers</h4>
+          <ul class="list-unstyled">
+            @for (item of printers; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/printers']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">Gaming</button>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
+      <button class="border-0 bg-transparent  toggle-btn" (click)="toggleDropdown($event)">TVs & Monitors<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
+      <div class="menu d-flex gap-5">
+        <div class="">
+          <h4 class="fw-semibold">TVs</h4>
+          <ul class="list-unstyled">
+            @for (item of Tvs; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/tvs']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="">
+          <h4 class="fw-semibold">Monitors</h4>
+          <ul class="list-unstyled">
+            @for (item of monitors; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/tvs']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">Accessories</button>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
+      <button class="border-0 bg-transparent toggle-btn " (click)="toggleDropdown($event)">Gaming<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
+      <div class="menu d-flex gap-5">
+        <div class="">
+          <h4 class="fw-semibold">Games & Consoles</h4>
+          <ul class="list-unstyled">
+            @for (item of games; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/games']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">
-        Home Appliances
-      </button>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
+      <button class="border-0 bg-transparent toggle-btn " (click)="toggleDropdown($event)">Accessories<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
+      <div class="menu d-flex gap-5">
+        <div class="">
+          <h4 class="fw-semibold">Mobile Accessories</h4>
+          <ul class="list-unstyled">
+            @for (item of mobileAccessories; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/accessories']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="">
+          <h4 class="fw-semibold">Laptops Accessories</h4>
+          <ul class="list-unstyled">
+            @for (item of laptopsAccessories; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/accessories']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="">
+          <h4 class="fw-semibold">Other Accessories</h4>
+          <ul class="list-unstyled">
+            @for (item of otherAccessories; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/accessories']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">Brand</button>
-      <mat-menu #belowMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
+      <button class="border-0 bg-transparent toggle-btn " (click)="toggleDropdown($event)">Home Appliances<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
+      <div class="menu d-flex gap-5">
+        <div class="">
+          <h4 class="fw-semibold">Kitchen Appliances</h4>
+          <ul class="list-unstyled">
+            @for (item of kitchenAppliances; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/kitchenappliances']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="">
+          <h4 class="fw-semibold">Small Appliances</h4>
+          <ul class="list-unstyled">
+            @for (item of smallAppliances; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/smallappliances']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <button class="border-0 bg-transparent toggle-btn " (click)="toggleDropdown($event)">Brand<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
+      <div class="menu d-flex gap-5">
+        <div class="">
+          <h4 class="fw-semibold">Main Brand</h4>
+          <ul class="list-unstyled">
+            @for (item of mainBrands; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/brand/' + item.toLowerCase()]"
+                routerLinkActive="router-link-active"
+                (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="">
+          <h4 class="fw-semibold">Other Brands</h4>
+          <ul class="list-unstyled">
+            @for (item of otherBrands; track $index) {
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/brand/' + item.toLowerCase()]"
+                routerLinkActive="router-link-active"
+                (click)="closeMenu()"
+                >{{ item }}</a
+              >
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
+<div class="overlay" [hidden]="!isDropdownOpen" (click)="closeMenu()"></div>

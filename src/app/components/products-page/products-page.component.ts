@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { CardComponent } from '../shared/card/card.component';
 import { BrandsComponent } from '../shared/brands/brands.component';
@@ -11,11 +11,13 @@ import { BrandService } from '../../Services/brandServices/brand.service';
 import { CategoryService } from '../../Services/category.services/category.service';
 import { CategoriesComponent } from '../shared/categories/categories.component';
 import { ProductService } from '../../Services/productServices/product.service';
-import { IProduct } from '../../Models/iproduct';
-import {  FormsModule } from '@angular/forms';
-import { MatRadioModule} from '@angular/material/radio';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+
+import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { delay } from 'rxjs';
+import { IProduct } from '../../Models/product/iproduct';
 
 @Component({
   selector: 'app-products-page',
@@ -32,11 +34,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     FormsModule,
     MatRadioModule,
     MatSliderModule,
-    MatCheckboxModule
+    MatCheckboxModule,
 
   ],
 })
-export class ProductsPageComponent implements OnInit {
+export class ProductsPageComponent implements OnInit ,AfterViewInit{
   categories: ICategory[] = [];
   brands: IBrand[] = [];
   mainUrl: string = '';
@@ -49,10 +51,21 @@ export class ProductsPageComponent implements OnInit {
     { name: 'Sort by name: ascending', value: 3 },
     { name: 'Sort by name: descending', value: 4 },
   ];
-  stock!:string;
+  stock!: string;
   selectedSort!: string;
   products: IProduct[] = [];
   @ViewChild('ProductGrid') productGrid!: ElementRef;
+  @ViewChild('test') test!: ElementRef;
+
+
+  // infinite scroll
+  isLoading: boolean = false;
+  currentPage: number = 1;
+  itemPerPage: number = 2;
+  maxPageNumber!:number;
+  c=1;
+  toggleIsLoading = () => (this.isLoading = !this.isLoading);
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -60,21 +73,33 @@ export class ProductsPageComponent implements OnInit {
     private _categoryService: CategoryService,
     private _productService: ProductService
   ) {}
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting &&!this.isLoading) {
+          this.onScroll();
+          if (this.maxPageNumber===this.currentPage) {
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    },
+    );
+    observer.observe(this.test.nativeElement);
+  }
+
+
 
   ngOnInit() {
-
-
     this.mainUrl = this.router.url.split('/')[1];
 
-    this._productService.getALLProducts().subscribe({
-      next: (prods) => {
-        console.log(prods);
-        this.products = prods;
-        console.log(this.products);
-        console.log(this.products[0].cover);
-      },
-    });
 
+    //
+
+    //Load the Data
+    this.loadData();
+
+    //Handle Route
     if (this.mainUrl === 'category') {
       this.firstPartUrl = this.activatedRoute.snapshot.params['category'];
       this.SecondPartUrl = this.activatedRoute.snapshot.params['brand'];
@@ -93,9 +118,7 @@ export class ProductsPageComponent implements OnInit {
       });
       this.routeBrandCheck();
     }
-    console.log(this.mainUrl);
-    console.log(this.firstPartUrl);
-    console.log(this.SecondPartUrl);
+
   }
 
   handleGrid(e: Event) {
@@ -180,5 +203,47 @@ export class ProductsPageComponent implements OnInit {
         this.products.sort((a, b) => b.name.localeCompare(a.name));
         break;
     }
+  }
+
+////////////////////////////////////////////////////////////////
+
+//Infinite Scroll Functions
+  loadData()  {
+    this.toggleIsLoading();
+    this._productService
+      .getProductsPagination( this.itemPerPage,this.currentPage)
+      .subscribe({
+        next: (data: any) => {
+          this.products = data.entity;
+          this.maxPageNumber = Math.ceil( data.count /this.itemPerPage);
+        },
+        error: (error) => {
+          console.log(error.message);
+        },
+        complete: () => {
+          this.toggleIsLoading();
+        },
+      });
+  };
+  appendData(){
+    this.toggleIsLoading();
+    this._productService
+      .getProductsPagination( this.itemPerPage,this.currentPage)
+      .pipe(delay(3000))
+      .subscribe({
+        next: (data: any) => {
+          this.products = [...this.products,...data.entity];
+        },
+        error: (error) => {
+          console.log(error.message);
+        },
+        complete: () => {
+          this.toggleIsLoading();
+        },
+      });
+  }
+  onScroll(){
+    this.currentPage++;
+    this.appendData();
   }
 }

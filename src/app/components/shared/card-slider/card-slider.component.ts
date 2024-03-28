@@ -25,8 +25,8 @@ export class CardSliderComponent implements AfterViewInit, OnDestroy {
     });
   }
   ngAfterViewInit(): void {
-    this.insertCardCopies();
-    this.autoPlay();
+    // this.insertCardCopies();
+    // this.autoPlay();
 
   }
 
