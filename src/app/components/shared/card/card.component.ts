@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IProduct } from '../../../Models/iproduct';
+
 import { RouterModule } from '@angular/router';
+import { IProduct } from '../../../Models/product/iproduct';
 
 @Component({
   selector: 'app-card',

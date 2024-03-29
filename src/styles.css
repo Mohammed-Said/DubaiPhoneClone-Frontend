@@ -23,4 +23,19 @@ p-dropdown > div {
 p-dropdown ul {
   padding-left: 0px;
 }
+.p-galleria-indicator.p-highlight button{
+  background-color: #2b7ab9;
+}
+p-galleria .p-link{
+  border-radius: 50%;
+  color: ##2b7ab9;
+}
 
+p-galleria .p-galleria-item-prev,
+
+p-galleria .p-galleria-item-next{
+  color: #2b7ab9;
+}
+/* .p-carousel-indicators{
+  display: none;
+} */

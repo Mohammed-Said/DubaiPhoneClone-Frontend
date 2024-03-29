@@ -8,8 +8,10 @@ import { CategoryService } from '../../Services/category.services/category.servi
 import { ProductService } from '../../Services/productServices/product.service';
 import { ICategory } from '../../Models/icategory';
 import { IBrand } from '../../Models/ibrand';
-import { IProduct } from '../../Models/iproduct';
+
 import { LeftSideComponent } from "../left-side/left-side.component";
+import { IProduct } from '../../Models/product/iproduct';
+import { LandingComponent } from "./landing/landing.component";
 
 @Component({
     selector: 'app-home',
@@ -21,7 +23,8 @@ import { LeftSideComponent } from "../left-side/left-side.component";
         BrandsComponent,
         CardComponent,
         ProductSectionComponent,
-        LeftSideComponent
+        LeftSideComponent,
+        LandingComponent
     ]
 })
 export class HomeComponent {

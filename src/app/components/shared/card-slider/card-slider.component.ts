@@ -25,14 +25,15 @@ export class CardSliderComponent implements AfterViewInit, OnDestroy {
     });
   }
   ngAfterViewInit(): void {
-    this.insertCardCopies();
-    this.autoPlay();
+     this.insertCardCopies();
+     this.autoPlay();
 
   }
 
   isDragging = false;
   @Input() isAutoPlay : boolean=true;
   @Input() isSmall: boolean=false;
+  @Input() CardWidth: number=0;
   startX!: number;
   startScrollLeft!: number;
   timeoutId: any;
@@ -78,36 +79,36 @@ export class CardSliderComponent implements AfterViewInit, OnDestroy {
     if(!this.carousel.nativeElement.matches(":hover")) this.autoPlay();
   }
   autoPlay()  {
-    const firstCardWidth =
-      (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
-        ?.offsetWidth ?? 0;
+    // const firstCardWidth =
+    //   (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
+    //     ?.offsetWidth ?? 0;
 
     if(!this.isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
     // Autoplay the carousel after every 2500 ms
-    this.timeoutId = setTimeout(() => this.carousel.nativeElement.scrollLeft += firstCardWidth +16, 2500) ;
+    this.timeoutId = setTimeout(() => this.carousel.nativeElement.scrollLeft += this.CardWidth +16, 2500) ;
 
 }
   arrowClick(e: Event) {
-    const firstCardWidth =
-      (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
-        ?.offsetWidth ?? 0;
+    // const firstCardWidth =
+    //   (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
+    //     ?.offsetWidth ?? 0;
 
     this.carousel.nativeElement.scrollLeft +=
       (e.target as HTMLElement).id == 'left'
-        ? -firstCardWidth -16
-        : firstCardWidth + 16;
+        ? -this.CardWidth -16
+        : this.CardWidth + 16;
   }
   clear(){
     clearTimeout(this.timeoutId);
   }
   // Functions for carousel logic
   insertCardCopies = () => {
-    const firstCardWidth =
-      (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
-        .offsetWidth ?? 0;
+    // const firstCardWidth =
+    //   (this.carousel.nativeElement.querySelector('.item') as HTMLElement)
+    //     .offsetWidth ?? 0;
 
     const cardPerView = Math.round(
-      this.carousel.nativeElement.offsetWidth / firstCardWidth
+      this.carousel.nativeElement.offsetWidth / this.CardWidth
     );
     const carouselChildren = Array.from(this.carousel.nativeElement.children);
 
