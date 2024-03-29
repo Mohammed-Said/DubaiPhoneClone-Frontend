@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { IUser } from '../../Models/user/iuser';
@@ -96,4 +97,5 @@ export class UserService {
   updateMyData(user: IUpdatedUser): Observable<IUser> {
     return this.httpClient.put<IUser>(this.URL + `/myprofile`, user);
   }
+
 }

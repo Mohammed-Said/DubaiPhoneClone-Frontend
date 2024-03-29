@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light p1">
   <div class="container-fluid">
     <a class="navbar-brand fs-6" href="#">
@@ -65,10 +66,12 @@
   <div class="container-fluid">
     <a class="text-danger fw-medium nav-link">
       <img src="/assets/last-piece.svg" />
+
       Last Piece
     </a>
 
     <!--=============== Dropdown ============================ -->
+
     <div class="Filter ">
 
       <button class="border-0 bg-transparent  toggle-btn" (click)="toggleDropdown($event)">Mobiles & Tablets<i class="fa-solid fa-angle-down arrow arrow-up ms-2 "></i></button>
@@ -76,6 +79,7 @@
         <div class="">
           <h4 class="fw-semibold">Mobiles</h4>
           <ul class="list-unstyled">
+
             @for (item of mobiles; track $index) {
             <li class="p-2">
               <a
@@ -312,5 +316,6 @@
       </div>
     </div>
   </div>
+
 </nav>
 <div class="overlay" [hidden]="!isDropdownOpen" (click)="closeMenu()"></div>

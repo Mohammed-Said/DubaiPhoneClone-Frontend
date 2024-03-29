@@ -4,6 +4,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 
 import { BottomFootetrComponent } from './components/bottom-footetr/bottom-footetr.component';
+
 import { HeaderComponent } from "./components/header/header.component";
 import { CartComponent } from "./components/cart/cart/cart.component";
 
@@ -15,7 +16,9 @@ import { CartComponent } from "./components/cart/cart/cart.component";
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
+
     imports: [RouterOutlet, HomeComponent, BottomFootetrComponent, RouterModule, HeaderComponent, CartComponent]
+
 })
 export class AppComponent {
   title = 'DubaiPhoneClone';
