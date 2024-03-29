@@ -41,9 +41,7 @@ export class HomeComponent {
 
     this._productService.getALLProducts().subscribe({next:(prods)=>
       {
-        console.log(prods);
         this.Products=prods;
-
       }
 
     })
