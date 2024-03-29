@@ -1,7 +1,9 @@
 import { CommonModule, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { UserService } from '../../Services/userService/user.service';
+import { ICreatingUser } from '../../Models/user/icreating-user';
 
 @Component({
   selector: 'app-signup',
@@ -14,26 +16,31 @@ export class SignupComponent {
 
 signform:FormGroup;
 
-constructor(formbilder:FormBuilder){
+constructor(formbilder:FormBuilder,private userService:UserService,private router:Router) {
   this.signform=new FormGroup({
-    Username:new FormControl("",[Validators.required]),
+    UserName:new FormControl("",[Validators.required]),
     Email:new FormControl("",[Validators.required]),
-    password:new FormControl("",[Validators.required])
+    Password:new FormControl("",[Validators.required])
   })
   console.log(this.signform.value);
-  
+
 }
-get Username(){
-  return this.signform.get('Username');
+get UserName(){
+  return this.signform.get('UserName')?.value;
 }
 get Email(){
-  return this.signform.get('Email');
+  return this.signform.get('Email')?.value;
 }
-get password(){
-  return this.signform.get('password');
+get Password(){
+  return this.signform.get('Password')?.value;
 }
 save(form:FormGroup){
   console.log(form.value);
-  
+}
+signup(){
+  let user:ICreatingUser={email:this.Email, password:this.Password,username:this.UserName}
+  console.log(user);
+  this.userService.registration(user);
+  // this.router.navigate(['/']);
 }
 }

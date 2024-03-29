@@ -6,13 +6,22 @@
       <img class="w-100" src="assets/Images/{{imagePath}}" alt="hurry-up">
     </a>
   </div>
-  <app-card-slider [isAutoPlay]="false" class="pt-5" >
+  <!-- <app-card-slider [isAutoPlay]="false" class="pt-5" [CardWidth]="300">
     @for (prod of products; track prod.id;let i=$index) {
       <li class="list-unstyled item">
         <app-card [product]="prod"></app-card>
       </li>
       }
-  </app-card-slider>
+  </app-card-slider> -->
+  <p-carousel [value]="products" [numVisible]="5" [showIndicators]="false" [numScroll]="1" [circular]="true"  [autoplayInterval]="5000">
+    <ng-template let-prod pTemplate="item">
+      <li class="list-unstyled item me-3">
+        <app-card [product]="prod"></app-card>
+      </li>
+
+    </ng-template>
+</p-carousel>
+
   <div class="btn px-3 my-4 mx-auto text-center d-flex justify-content-center" >
     <a class="primary-btn" href="#">Shop All {{title}}</a>
   </div>

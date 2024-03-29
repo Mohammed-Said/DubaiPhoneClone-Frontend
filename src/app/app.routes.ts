@@ -13,11 +13,14 @@ export const routes: Routes = [
     {path:"",component:HomeComponent},
     {path:"sign up",component:SignupComponent,title:"sign up"},
     {path:"login",component:LoginComponent,title:"login"},
-    {path:"category" ,component:ProductsPageComponent},
-    {path:"category/:category",component:ProductsPageComponent},
-    {path:"category/:category/:brand",component:ProductsPageComponent},
-    {path:"brand/:brand",component:ProductsPageComponent,title:"brand"},
+    {path:"category" ,component:ProductsPageComponent,children:[
+      {path:":category",component:ProductsPageComponent},
+      {path:":category/:brand",component:ProductsPageComponent},
+    ]},
+    {path:"brand",component:ProductsPageComponent,children:[
+      {path:":brand",component:ProductsPageComponent},
+    ]},
     {path:"product/:name",component:DetailsComponent},
-    {path:"**",component:NotFoundComponent}
-
+    {path:"not-found",component:NotFoundComponent},
+    {path:"**",redirectTo:"not-found"}
 ];

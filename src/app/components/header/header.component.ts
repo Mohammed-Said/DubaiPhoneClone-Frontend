@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../../Services/userService/user.service';
 
 @Component({
   selector: 'app-header',
@@ -94,11 +95,20 @@ export class HeaderComponent implements AfterViewInit {
   isDropdownOpen: boolean = false;
 
   btns!: NodeListOf<HTMLElement>;
+  isLoggedIn: boolean = false;
+constructor(private userService: UserService ) {
+}
 
   ngAfterViewInit(): void {
+  this.userService.UserLoggedIn.subscribe(d=>this.isLoggedIn=d);
+  console.log(this.isLoggedIn);
     this.btns = document.querySelectorAll('.toggle-btn');
-    console.log(this.btns);
+    //this.isLoggedIn=this.userService.userState;
+
   }
+
+
+
   toggleDropdown(e: Event) {
     this.btns.forEach((item: HTMLElement) => {
       if (item === (e.currentTarget as HTMLElement)) {

@@ -35,15 +35,29 @@
       <i class="fa fa-search" id="search"></i>
       <input type="text" placeholder="Search products..." />
     </div>
-    <button type="button" class="btn btn-primary custom-button">
-      <i class="material-icons button-icon">person</i>
-      Login
-    </button>
+    <div class="btns d-flex gap-4">
+      @if(!isLoggedIn){
 
-    <button type="button" class="btn btn-primary custom-button">
-      <i class="fa fa-solid fa-cart-plus button-icon"></i>
-      Cart<span class="fs-6 text fw-medium px-2"> ({{ cartCount }})</span>
-    </button>
+        <button type="button" class="btn btn-primary custom-button" routerLink="/login">
+          <i class="material-icons button-icon">person</i>
+          Login
+        </button>
+      }
+      @else{
+        <button type="button" class="btn btn-primary custom-button" routerLink="/account">
+          <i class="material-icons button-icon">person</i>
+          Account
+        </button>
+        <button type="button" class="btn btn-primary custom-button" routerLink="/account">
+          <i class="fa-solid fa-heart me-2 text-black"></i>
+          Wishlist
+        </button>
+      }
+      <button type="button" class="btn btn-primary custom-button">
+        <i class="fa fa-solid fa-cart-plus button-icon"></i>
+        Cart<span class="fs-6 text fw-medium px-2"> ({{ cartCount }})</span>
+      </button>
+    </div>
   </div>
 </nav>
 
