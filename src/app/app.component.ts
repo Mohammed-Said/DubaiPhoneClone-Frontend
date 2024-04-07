@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Route, Router, RouterModule, RouterOutlet } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 
@@ -22,8 +22,17 @@ import { CartComponent } from "./components/cart/cart/cart.component";
 })
 export class AppComponent {
   title = 'DubaiPhoneClone';
-
-  constructor() {}
+  showHeader:boolean = true;
+  constructor(private router:Router) {
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        if (val.url==='/checkout')
+          this.showHeader=false;
+        else
+        this.showHeader=true;
+      }
+    });
+  }
 
 
 

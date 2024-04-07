@@ -4,17 +4,23 @@
 @import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 body {
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", sans-serif !important;
 }
-
+:root{
+  --main-color:#2B7AB9;
+}
+.main-color{
+  color: var(--main-color);
+}
 html,
 body {
   height: 100%;
+
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #f0f3f4;
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+  background-image: linear-gradient(70.66deg, #e8ecee 0%, #f9fafb 100%) ;
 }
 p-dropdown > div {
   border-radius: 200px;
@@ -28,7 +34,7 @@ p-dropdown ul {
 }
 p-galleria .p-link{
   border-radius: 50%;
-  color: ##2b7ab9;
+  color: #2b7ab9;
 }
 
 p-galleria .p-galleria-item-prev,
@@ -39,3 +45,11 @@ p-galleria .p-galleria-item-next{
 /* .p-carousel-indicators{
   display: none;
 } */
+/* product Details */
+
+.p-galleria-thumbnail-container{
+  background-color: transparent;
+}
+.p-image-preview-container:hover{
+background-color: #fff;
+}

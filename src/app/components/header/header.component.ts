@@ -1,11 +1,13 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../Services/userService/user.service';
+import { LocalizationService } from '../../Services/localiztionService/localization.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -96,7 +98,10 @@ export class HeaderComponent implements AfterViewInit {
 
   btns!: NodeListOf<HTMLElement>;
   isLoggedIn: boolean = false;
-constructor(private userService: UserService ) {
+  isArabic!: boolean ;
+constructor(private userService: UserService,private localizationService:LocalizationService ) {
+  this.localizationService.IsArabic.subscribe(ar=>this.isArabic=ar);
+
 }
 
   ngAfterViewInit(): void {

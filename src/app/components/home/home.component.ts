@@ -39,9 +39,9 @@ export class HomeComponent {
   ) {}
   ngOnInit() {
 
-    this._productService.getALLProducts().subscribe({next:(prods)=>
+    this._productService.getProductsPagination({numOfProductPerPage:8,pageNumber:1}).subscribe({next:(prods:any)=>
       {
-        this.Products=prods;
+        this.Products=prods.entity;
       }
 
     })

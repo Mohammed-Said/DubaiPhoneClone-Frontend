@@ -76,6 +76,6 @@ export class CartService {
       });
   }
   getCartProducts(id: string): Observable<IProductCart[]> {
-    return this.httpClient.get<ICartItem[]>(this.URL + '/GetCartProducts?userId=' + id);
+    return this.httpClient.get<IProductCart[]>(this.URL + '/GetCartProducts?userId=' + id);
   }
 }

@@ -29,7 +29,6 @@ export class UserService {
 
     if (this.userState) {
       this.user=jwtService.decodeToken(localStorage.getItem('token') as string);
-      console.log(this.user);
     }
   }
 
@@ -55,7 +54,7 @@ export class UserService {
         if (data.status) {
           localStorage.setItem('token', data.token);
           this.isUserLoggedIn.next(true);
-          // this.router.navigate(['/']);
+          this.router.navigate(['/']);
         }
       },
     });
