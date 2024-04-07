@@ -215,7 +215,7 @@ export class ProductsPageComponent implements OnInit ,AfterViewInit{
       pageNumber: this.currentPage
     }
     this._productService
-      .getProductsOrderBy("price","ASC",URLparams)
+      .getProductsPagination(URLparams)
       .subscribe({
         next: (data: any) => {
           this.products = data.entity;

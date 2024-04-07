@@ -27,6 +27,7 @@ export class CartService {
 
   addToCart(id: number) {
     let indexProdInCart = this.cart.findIndex((val) => val.productId === id);
+    console.log('before',this.cart);
 
     let cartItem: ICartItem;
 
@@ -38,7 +39,7 @@ export class CartService {
       this.cart.push(cartItem);
     } else {
       this.cart[indexProdInCart].quantity++;
-      cartItem = this.cart[indexProdInCart];
+      cartItem ={... this.cart[indexProdInCart]};
     }
 
     if (this._userService.userState)
@@ -46,7 +47,7 @@ export class CartService {
       cartItem.userId = this._userService.User?.nameidentifier;
       this.addCartToApi(cartItem);
     }
-
+    console.log(this.cart);
     this.addCartToMemory();
   }
   private addCartToMemory() {

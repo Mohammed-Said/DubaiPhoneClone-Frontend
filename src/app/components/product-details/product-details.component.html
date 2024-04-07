@@ -3,23 +3,24 @@
     <div class="col-6">
       <!-- <img [src]="itemimg[0]" alt=""> -->
       <!-- <app-galleria-basic-demo></app-galleria-basic-demo> -->
-      <p-galleria [value]="itemimg" [showItemNavigators]="true" [circular]="true" [numVisible]="4"
-        [containerStyle]="{ 'max-width': '640px' }">
+      <p-galleria [value]="product.images" [showItemNavigators]="true" [circular]="true" [numVisible]="4" [showThumbnails]="product.images.length >1"
+        [showItemNavigators]="product.images.length >1"
+        >
         <ng-template pTemplate="item" let-item>
           <!-- <img [src]="item" style="width: 100%; display: block;" /> -->
           <div class="img-preview">
-            <p-image [src]="item" [preview]="true" alt="Image" width="100%">
+            <p-image [src]="'/assets/Images/Products/'+item" [preview]="true" alt="Image" width="100%" height="550px">
               <ng-template pTemplate="indicator">
                 <i class="pi pi-check"></i>
               </ng-template>
             </p-image>
           </div>
         </ng-template>
-        <ng-template pTemplate="thumbnail" let-item>
-          <div class="grid grid-nogutter justify-content-center">
-            <img [src]="item" />
-          </div>
-        </ng-template>
+          <ng-template pTemplate="thumbnail" let-item  >
+            <div class="grid grid-nogutter justify-content-center" >
+              <img [src]="'/assets/Images/Products/'+item" [alt]="item" />
+            </div>
+          </ng-template>
       </p-galleria>
       <div class="d-flex justify-content-around align-item-center m-3">
         <div class="d-flex flex-column justify-content-center align-items-center">
@@ -81,9 +82,9 @@
     </div>
     <div class="col-6 px-4">
       <h2 class="text-secondary m-0">Xiaomi</h2>
-      <h3 class="prd-name">{{ itemname }}</h3>
-      <h3 class="sale-price-title">Sale Price : {{ price }} EGP</h3>
-      <p class="fs-6">Normal Price: {{ nprice }} EGP</p>
+      <h3 class="prd-name">{{ product.name }}</h3>
+      <h3 class="sale-price-title">Sale Price : {{ product.salePrice }} EGP</h3>
+      <p class="fs-6">Normal Price: {{ product.normalPrice }} EGP</p>
       <p class="fs-6">* Normal price apply on 0% interest offers.</p>
       <div class="d-flex justify-content-between align-items-center  my-4">
         <div>
@@ -95,7 +96,7 @@
               class="ms-2 fa-solid fa-arrow-right"></i></button>
         </div>
         <div>
-          @if (checked) {
+          @if (product.stock > 0)  {
           <p class="in-stock stock">In Stock</p>
           } @else {
           <p class="out-of-stock stock">NOT Avaliable</p>

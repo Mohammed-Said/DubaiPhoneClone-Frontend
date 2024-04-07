@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment.development';
 
 import { IProduct } from '../../Models/product/iproduct';
 import { IPagination } from '../../Models/ipagination';
+import { IProductDetails } from '../../Models/product/iproduct-details';
 
 @Injectable({
   providedIn: 'root',
@@ -109,8 +110,8 @@ export class ProductService {
     return this.httpClient.get<IProduct[]>(this.URL + '/search/' + name);
   }
 
-  getProductByID(id: number): Observable<IProduct> {
-    return this.httpClient.get<IProduct>(this.URL + '/' + id);
+  getProductByID(id: number): Observable<IProductDetails> {
+    return this.httpClient.get<IProductDetails>(this.URL + '/' + id);
   }
   getProductsCountByCategory(id: number): Observable<IProduct[]> {
     return this.httpClient.get<IProduct[]>(this.URL + '/catCount/' + id);
