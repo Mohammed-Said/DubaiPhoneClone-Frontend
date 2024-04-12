@@ -1,9 +1,9 @@
 <div class="mx-auto mx-5 position-relative mt-5 py-5">
-  <div class="container mb-5 pb-5">
+  <div class="container mb-5 pb-5" [ngClass]="{'text-end': isArabic}">
 
     <h3 class="fw-semibold fs-2">{{title}}</h3>
     <a href="#">
-      <img class="w-100" src="assets/Images/{{imagePath}}" alt="hurry-up">
+      <img class="w-100" [src]="imagePath" alt="hurry-up">
     </a>
   </div>
   <!-- <app-card-slider [isAutoPlay]="false" class="pt-5" [CardWidth]="300">
@@ -23,6 +23,6 @@
 </p-carousel>
 
   <div class="btn px-3 my-4 mx-auto text-center d-flex justify-content-center" >
-    <a class="primary-btn" href="#">Shop All {{title}}</a>
+    <a class="primary-btn" href="#"><span> {{'home.btn' |translate}}</span>&nbsp; <span>{{title}}</span></a>
   </div>
 </div>

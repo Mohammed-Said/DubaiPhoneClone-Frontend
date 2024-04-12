@@ -1,20 +1,20 @@
-<div class="wrapper">
+<div class="wrapper" >
 <app-landing></app-landing>
 
   <app-categories [Categories]="Categories"></app-categories>
   <section>
     <div class="container mx-auto mx-5 position-relative">
       <a href="#">
-        <img class="w-100" src="assets/Images/a15-hurry-up-web-en-copy.webp" alt="hurry-up">
+        <img class="w-100" [src]="'assets/Images/Home/'+ ('home.sectionImages.hurryUp' | translate) " alt="hurry-up">
       </a>
     </div>
   </section>
   <app-brands [brands]="Brands"></app-brands>
-  <app-product-section [products]="Products" imagePath="newArrival.webp" title="New Arrivals" ></app-product-section>
-  <app-product-section [products]="Products" imagePath="apple-sec.webp" title="Apple" ></app-product-section>
-  <app-product-section [products]="Products" imagePath="laptopSec.webp" title="Laptops" ></app-product-section>
-  <app-product-section [products]="Products" imagePath="WatchSec.webp" title="Smart Watch" ></app-product-section>
-  <app-product-section [products]="Products" imagePath="homeSec.webp" title="Home Appliances" ></app-product-section>
-  <app-product-section [products]="Products" imagePath="sound.webp" title="Sound" ></app-product-section>
-  <app-left-side></app-left-side>
+  <app-product-section [products]="Products" [imagePath]="'assets/Images/Home/'+('home.sectionImages.newArrival' | translate)" [title]="('home.title.newArrival' | translate) "></app-product-section>
+  <app-product-section [products]="Products" [imagePath]="'assets/Images/Home/'+('home.sectionImages.apple' | translate)" [title]="('home.title.apple' | translate)" ></app-product-section>
+  <app-product-section [products]="Products" [imagePath]="'assets/Images/Home/'+('home.sectionImages.laptop' | translate)" [title]="('home.title.laptop' | translate)" ></app-product-section>
+  <app-product-section [products]="Products" [imagePath]="'assets/Images/Home/'+('home.sectionImages.watch' | translate)" [title]="('home.title.watch' | translate) " ></app-product-section>
+  <app-product-section [products]="Products" [imagePath]="'assets/Images/Home/'+('home.sectionImages.home' | translate)" [title]="('home.title.home' | translate) " ></app-product-section>
+  <app-product-section [products]="Products" [imagePath]="'assets/Images/Home/'+('home.sectionImages.sound' | translate)" [title]="('home.title.sound' | translate)" ></app-product-section>
+  <app-why-us></app-why-us>
 </div>

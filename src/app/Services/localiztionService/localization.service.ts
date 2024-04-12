@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalizationService {
   private isArabic: BehaviorSubject<boolean>;
-  constructor() {
+  constructor(private translate: TranslateService) {
     this.isArabic = new BehaviorSubject<boolean>(false);
-    if (localStorage.getItem('language') ==='ar')
-    this.isArabic = new BehaviorSubject<boolean>(true);
+    if (localStorage.getItem('language') === 'ar')
+      this.isArabic = new BehaviorSubject<boolean>(true);
   }
   get IsArabic(): Observable<boolean> {
     return this.isArabic.asObservable();
   }
-  setLanguage(isArabic: boolean) {
-    this.isArabic.next(isArabic);
-    this.SaveInMemory();
-  }
-  private SaveInMemory(){
-    localStorage.setItem('language', this.isArabic.value?'ar':'en');
-  }
-  getLanguage(): string {
-    return localStorage.getItem('language') ?? 'en' ;
+  ChangeLanguage() {
+
+    let language = localStorage.getItem('language') ?? 'en';
+    if (language === 'ar') this.isArabic.next(false);
+    else this.isArabic.next(true);
+
+    language=this.isArabic.value ? 'ar' : 'en';
+    localStorage.setItem('language',language );
+
+    this.translate.use(language);
   }
 }

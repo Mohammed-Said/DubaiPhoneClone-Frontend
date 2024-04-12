@@ -1,14 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {  Component, importProvidersFrom,  } from '@angular/core';
 import { NavigationEnd, Route, Router, RouterModule, RouterOutlet } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-
-import { BottomFootetrComponent } from './components/bottom-footetr/bottom-footetr.component';
-
 import { HeaderComponent } from "./components/header/header.component";
-import { CartComponent } from "./components/cart/cart/cart.component";
+import { FooterComponent } from './components/footer/footer.component';
 
-
+import { TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -17,13 +15,15 @@ import { CartComponent } from "./components/cart/cart/cart.component";
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
 
-    imports: [RouterOutlet, HomeComponent, BottomFootetrComponent, RouterModule, HeaderComponent, CartComponent]
+    imports: [RouterOutlet, RouterModule, HeaderComponent,FooterComponent,TranslateModule]
 
 })
 export class AppComponent {
   title = 'DubaiPhoneClone';
   showHeader:boolean = true;
-  constructor(private router:Router) {
+  constructor(private router:Router,private translate: TranslateService) {
+    let lang=localStorage.getItem('language');
+    translate.use(lang as string);
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         if (val.url==='/checkout')
@@ -33,7 +33,9 @@ export class AppComponent {
       }
     });
   }
-
-
-
 }
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+

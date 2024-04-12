@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
 import { Component } from '@angular/core';
 
-import { ProductsPageComponent } from './components/products-page/products-page.component';
+import { ProductsPageComponent } from './components/products/products-page/products-page.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/user/signup/signup.component';
+import { LoginComponent } from './components/user/login/login.component';
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { CardComponent } from './components/shared/card/card.component';
 
 export const routes: Routes = [
 
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path:"sign up",component:SignupComponent,title:"sign up"},
     {path:"login",component:LoginComponent,title:"login"},
     {path:"checkout",component:CheckoutComponent},
+    {path:"cart",component:CardComponent},
     {path:"category" ,component:ProductsPageComponent,children:[
       {path:":category",component:ProductsPageComponent},
       {path:":category/:brand",component:ProductsPageComponent},

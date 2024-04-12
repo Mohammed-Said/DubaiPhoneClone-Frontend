@@ -1,0 +1,186 @@
+{
+  "language": "العربية",
+  "nav": {
+    "mobiles": {
+      "apple": "Apple",
+      "samsung": "Samsung",
+      "oppo": "Oppo",
+      "vivo": "Vivo",
+      "realme": "Realme",
+      "xiaomi": "Xiaomi",
+      "honor": "Honor",
+      "huawei": "Huawei",
+      "infinix": "Infinix"
+    },
+    "tablets": {
+      "ipad": "Ipad",
+      "samsung": "Samsung Tablet",
+      "realme": "Realme Tablet",
+      "lenovo": "Lenovo Tablet",
+      "huawei": "Huawei Tablet",
+      "tcl": "TCL"
+    },
+    "laptops": {
+      "asus": "Asus Laptops",
+      "dell": "Dell Laptops",
+      "hp": "HP Laptops",
+      "lenovo": "Lenovo Laptops",
+      "apple": "Apple Laptops"
+    },
+    "printers": {
+      "hp": "HP Printers",
+      "epson": "Epson Printers"
+    },
+    "tvs": {
+      "samsung": "Samsung TV",
+      "lg": "LG TV",
+      "Rowa": "Rowa TV",
+      "castle": "Castle TV",
+      "ata": "ATA TV",
+      "ultra": "ULTRA TV"
+    },
+    "monitors": {
+      "lg": "LG Monitors"
+    },
+    "games": {
+      "playstation": "PlayStation Consoles",
+      "cds": "Games CDs",
+      "accessories": "Games Accessories",
+      "headset": "Gaming Headset",
+      "mouse": "Gaming Mouse & Keyboard",
+      "scooters": "NScooters"
+    },
+    "mobileAccessories": {
+      "watch": "Smart Watch",
+      "sound": "Sound & TWS",
+      "powerBank": "Power Bank",
+      "cables": "Cables & docks",
+      "covers": "Covers",
+      "screen": "Screen Protector",
+      "headset": "Mobile Sound & Headset"
+    },
+    "laptopsAccessories": {
+      "bag": "Bags",
+      "keyboard": "Keyboard & Mouse",
+      "flash": "Memories & Flashs",
+      "power": "Power & Batteries",
+      "Sound": "Sound & Headset"
+    },
+    "otherAccessories": {
+      "home": "Home Appliances",
+      "care": "Personal Care",
+      "Speakers": "Speakers",
+      "health": "Health equipment",
+      "car": "Car Solution",
+      "others": "Others"
+    },
+    "kitchen": {
+      "air": "Air Fryer",
+      "microwaves": "Microwaves",
+      "waffle": "Waffle & Sandwich Maker",
+      "blenders": "Blenders & Mixers",
+      "kettle": "Kettle & Coffee Make"
+    },
+    "small": {
+      "vacuum": "Vacuum",
+      "irons": "Irons",
+      "heater": "Heater"
+    },
+    "mainBrands": {
+      "apple": "Apple",
+      "samsung": "Samsung",
+      "lenovo": "Lenovo",
+      "huawei": "Huawei",
+      "lg": "LG",
+      "xiaomi": "Xiaomi",
+      "oppo": "Oppo"
+    },
+    "otherBrands": {
+      "dell": "Dell",
+      "hp": "HP",
+      "acer": "Acer",
+      "sony": "Sony",
+      "anker": "Anker",
+      "asus": "Asus",
+      "honor": "Honor"
+    },
+    "mainTitles": {
+      "title1": "Mobiles & Tablets",
+      "title2": "Laptops & Printers",
+      "title3": "TVs & Monitors",
+      "title4": "Gaming",
+      "title5": "Accessories",
+      "title6": "Home Appliances",
+      "title7": "Brand"
+    },
+    "subTitles": {
+      "title1": "Mobiles",
+      "title2": "Tablets",
+      "title3": "Laptops",
+      "title4": "Printers",
+      "title5": "TVs",
+      "title6": "Monitors",
+      "title7": "Games",
+      "title8": "Mobile Accessories",
+      "title9": "Laptops Accessories",
+      "title10": "Other Accessories",
+      "title11": "Kitchen Appliances",
+      "title12": "Vacuum",
+      "title13": "Main Brands",
+      "title14": "Other Brands"
+    }
+  },
+  "currency": "EGP",
+  "header": {
+    "lastPiece": "Last Piece",
+    "login": "Login",
+    "shoppingCart": "Shopping Cart",
+    "placeholder": "Search for Products....",
+    "whatsapp": "Whatsapp Support",
+    "stores": "Store Locator",
+    "shipping": "Free Delivery on Orders over"
+  },
+  "landing": {
+    "banner": [
+      "en/freeclip-banner-en-web-copy.webp",
+      "en/cib-eng-copy.webp",
+      "en/s24-banner-en-web-copy.webp",
+      "en/misr-en-924-copy.webp",
+      "en/nbe-banner-en-18-copy.webp",
+      "en/home-aman-en-copy.webp",
+      "en/qnb-n-banner-222-copy.webp",
+      "en/alex-banner-en-web-copy.webp",
+      "en/adib-banner-en-web-copy.webp",
+      "en/point-banner-en-web-codsdspy.webp",
+      "en/saib-eng-cop4y.webp"
+    ],
+    "subBanner": {
+      "banner1": "en/souhoola-banne-en-coooopy.webp",
+      "banner2": "en/banner-en-copy.webp"
+    }
+  },
+  "home": {
+    "sectionImages": {
+      "hurryUp": "en/x7b-bundle-eng-copy.webp",
+      "newArrival": "en/reno-11-eng-copy.webp",
+      "apple": "en/apple-sec.webp",
+      "laptop": "en/asus-g16-copy.webp",
+      "watch": "en/gt4-en-des-copy.webp",
+      "home": "en/homeSec.webp",
+      "sound": "en/free-clip-eng-copy.webp"
+    },
+    "title":{
+      "newArrival":"New Arrivals",
+      "apple":"Apple",
+      "laptop":"Laptops",
+      "watch":"Smart Watch",
+      "home":"Home Appliances",
+      "sound":"Sound"
+    },
+    "btn":"Shop All"
+  },
+  "card":{
+    "sale":"Sale!",
+    "btn":"Add to Cart"
+  }
+}
