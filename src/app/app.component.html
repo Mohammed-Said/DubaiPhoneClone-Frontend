@@ -1,10 +1,10 @@
 
 
-<app-header></app-header>
+<app-header [hidden]="!showHeader"></app-header>
 <!-- <app-cart></app-cart> -->
 <router-outlet></router-outlet>
 
   <!-- <app-details></app-details> -->
   <!-- <br> -->
-  <app-bottom-footetr></app-bottom-footetr>
+  <app-footer [hidden]="!showHeader"></app-footer>
 

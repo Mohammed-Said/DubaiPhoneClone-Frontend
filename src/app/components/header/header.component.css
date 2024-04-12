@@ -21,8 +21,8 @@ i{
 .search-bar {
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 7px 10px;
+  border-radius: 50px;
+  padding: 12px;
   display: flex;
   align-items: center;
   width: 800px;
@@ -49,16 +49,16 @@ i{
   justify-content: center;
   background-color: #FFFFFF; /* White background */
   border: none;
-  border-radius: 20px;
+  border-radius: 100px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   color: #000000;
   transition: border-color 0.3s ease;
-
+  padding: 11px 20px;
 }
 
 .button-icon {
   color: black;
-  font-size: 25px;
+  /* font-size: 25px; */
   margin-right: 8px;
 }
 
@@ -78,6 +78,15 @@ i{
 .p3{
   background-color: #edf0f2;
 }
+
+.lang-btn{
+  border-left: 1px solid rgb(71 85 105 );
+}
+.arabic .lang-btn{
+  border: none;
+  border-right: 1px solid rgb(71 85 105 );
+
+}
 /* Overlay */
 
 .overlay{
@@ -95,9 +104,10 @@ i{
 /* ================================Dropdown=========================================== */
 
 
-.Filter
+.arabic
 {
-  margin-right: 300px;
+  flex-direction: row-reverse;
+  text-align: right;
 }
 
 .grid , .g{
@@ -129,7 +139,7 @@ i{
   left: 0;
   z-index: 1;
   height: auto;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 .menu a{
   transition: all .3s ease;
@@ -137,6 +147,9 @@ i{
 .menu a:hover {
   text-decoration: underline;
   color: rgb(43 122 185);
+}
+.arabic .menu {
+  flex-direction: row-reverse;
 }
 .arrow{
   font-size: 15px;

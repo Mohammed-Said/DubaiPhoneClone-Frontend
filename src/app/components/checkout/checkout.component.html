@@ -1,0 +1,319 @@
+<header class="bg-white py-3 mb-3">
+  <div class="container d-flex justify-content-between ">
+    <div class="d-flex gap-2 align-items-center">
+      <i class="bi bi-shield-fill-check main-color fa-xl"></i>
+      <p class="m-0">Secure Checkout</p>
+    </div>
+    <img src="/assets/dubai-logo-svg.svg" alt="">
+    <div class="d-flex gap-4 align-items-center">
+      <a class="nav-link" href="https:wa.me/201018766426" target="_blank"><img src="/assets/Images/whatsapp.svg" alt="whatsApp"> &nbsp; Whatsapp Support</a>
+      <a class="nav-link" href="tel:01018766426"><img src="/assets/Images/telphone.svg" alt="whatsApp"> &nbsp;15254</a>
+      <a  class="nav-link" href="#"><bdi class="fs-6">العربية</bdi> </a>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <h1>Checkout</h1>
+  <div class="links">
+    <a href="#" class="nav-link"
+      ><i class="fa-solid fa-angle-left"></i> &nbsp; Back to Cart
+    </a>
+    <a class="main-color mt-4 d-block" href="#"
+      ><i class="fa-solid fa-ticket me-2"></i>Do You Have a Coupon?</a
+    >
+    <div class="row justify-content-between">
+      <div class="col-8 mb-5">
+        <div class="d-flex gap-3 mt-4 align-items-center  mt-5 mb-4">
+          <div class="checkout-step">1</div>
+          <h3 class="main-color fs-5 m-0">Shipping Info</h3>
+        </div>
+
+        <div class="shipping-page-form mb-5">
+          <h2
+            class="text-black font-semibold  mb-2"
+          >
+            1. Contact Information
+          </h2>
+            <div class="pb-3">
+              <label for="Email" class="col-sm-2 col-form-label"
+                >Email address <span class="text-danger">*</span></label
+              >
+              <div >
+                <input
+                  type="email"
+                  class="form-control rounded-pill py-2 px-3"
+                  id="Email"
+                />
+              </div>
+            </div>
+          <div class="mt-5 mb-4">
+            <h2 class="text-black font-semibold">
+              2. Select Shipping Method
+            </h2>
+             <div class="d-flex gap-3 flex-md-row flex-column shipping-method">
+              <div class="flex-grow-1 bg-white  p-4 rounded-4 d-flex justify-content-between selected-shipping-method" (click)="ShippingMethod($event)">
+                <div>
+                  <i class="fa-solid fa-xl fa-truck me-3"></i>
+                  <label for="home-delivery" class="fs-6">Home Delivery</label>
+                </div>
+                <input #homeDelivery  type="radio" name="shipping-method" checked id="home-delivery">
+              </div>
+              <div class="flex-grow-1 bg-white p-4 rounded-4 d-flex justify-content-between" (click)="ShippingMethod($event)">
+                <div>
+                  <i class="fa-solid fa-xl fa-store me-3"></i>
+                  <label for="store-pickup" class="fs-6">In-Store Pickup</label>
+                </div>
+                <input  type="radio" name="shipping-method" id="store-pickup">
+              </div>
+             </div>
+          </div>
+          @if (!homeDelivery.checked) {
+            <h3 class="fw-medium">Pickup Store</h3>
+          <select
+            id="shipping-pickup-store-select"
+            class="form-select  rounded-5 px-4 py-2 mb-5"
+            name="shipping_pickup_stores"
+            data-store=""
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            <option value="">Select a store</option>
+            <option
+              data-cost="0"
+              data-id="39418"
+              data-country="EG"
+              value="Zamalek"
+            >
+              Zamalek
+            </option>
+            <option
+              data-cost="0"
+              data-id="52791"
+              data-country="EG"
+              value="Smouha - Alexandria"
+            >
+              Smouha - Alexandria
+            </option>
+            <option
+              data-cost="0"
+              data-id="39413"
+              data-country="EG"
+              value="Nasr City"
+            >
+              Nasr City
+            </option>
+            <option
+              data-cost="0"
+              data-id="39421"
+              data-country="EG"
+              value="Mohandsen"
+            >
+              Mohandsen
+            </option>
+            <option
+              data-cost="0"
+              data-id="39426"
+              data-country="EG"
+              value="Miami - Alexandria"
+            >
+              Miami - Alexandria
+            </option>
+            <option
+              data-cost="0"
+              data-id="40037"
+              data-country="EG"
+              value="Mall of Egypt"
+            >
+              Mall of Egypt
+            </option>
+            <option
+              data-cost="0"
+              data-id="39411"
+              data-country="EG"
+              value="Mall of Arabia"
+            >
+              Mall of Arabia
+            </option>
+            <option
+              data-cost="0"
+              data-id="39412"
+              data-country="EG"
+              value="Maadi - Al Nasr"
+            >
+              Maadi - Al Nasr
+            </option>
+            <option
+              data-cost="0"
+              data-id="39422"
+              data-country="EG"
+              value="Maadi"
+            >
+              Maadi
+            </option>
+            <option
+              data-cost="0"
+              data-id="39415"
+              data-country="EG"
+              value="Faisal"
+            >
+              Faisal
+            </option>
+            <option
+              data-cost="0"
+              data-id="39417"
+              data-country="EG"
+              value="City Stars"
+            >
+              City Stars
+            </option>
+            <option
+              data-cost="0"
+              data-id="39424"
+              data-country="EG"
+              value="Alf Maskan"
+            >
+              Alf Maskan
+            </option>
+            <option
+              data-cost="0"
+              data-id="39423"
+              data-country="EG"
+              value="Al Salam"
+            >
+              Al Salam
+            </option>
+            <option
+              data-cost="0"
+              data-id="39416"
+              data-country="EG"
+              value="Al Obour"
+            >
+              Al Obour
+            </option>
+            <option
+              data-cost="0"
+              data-id="39414"
+              data-country="EG"
+              value="Al Korba"
+            >
+              Al Korba
+            </option>
+            <option
+              data-cost="0"
+              data-id="50300"
+              data-country="EG"
+              value="6 October - Hosry"
+            >
+              6 October - Hosry
+            </option>
+            <option
+              data-cost="0"
+              data-id="39425"
+              data-country="EG"
+              value="6 October"
+            >
+              6 October
+            </option>
+            <option
+              data-cost="0"
+              data-id="39419"
+              data-country="EG"
+              value="5th Settlement"
+            >
+              5th Settlement
+            </option></select
+          >
+          }
+          @else {
+            <h2
+            class="text-black font-semibold  mb-5"
+          >
+          3. Shipping Address
+          </h2>
+          }
+          <div class="name d-flex gap-5">
+            <div class="flex-grow-1">
+              <label  for="fname">First name &nbsp;<span class="text-danger">*</span></label>
+              <input class="form-control rounded-5 form-control-lg mt-2" id="fname" type="text">
+            </div>
+            <div class="flex-grow-1">
+              <label  for="lname">Last name &nbsp;<span class="text-danger">*</span></label>
+              <input class="form-control rounded-5 form-control-lg  mt-2" type="text" id="lname">
+            </div>
+
+          </div>
+          <div class="mt-4">
+            <label  for="address">Your Address &nbsp;<span class="text-danger">*</span></label>
+            <input class="form-control rounded-5 form-control-lg  mt-2" type="text" id="address">
+          </div>
+          <div class="mt-4">
+            <label  for="city">City &nbsp;<span class="text-danger">*</span></label>
+            <input class="form-control rounded-5 form-control-lg  mt-2" type="text" id="city">
+          </div>
+          <div class="mt-4 mb-5 pb-2">
+            <label  for="phone">Phone &nbsp;<span class="text-danger">*</span></label>
+            <input class="form-control rounded-5 form-control-lg  mt-2" type="text" id="phone">
+          </div>
+          <button type="submit"><i class="fa-solid fa-wallet me-2 fa-lg"></i><span class="fs-6">Proceed to Payment</span></button>
+
+        </div>
+
+        <div class="d-flex gap-3 mt-4 align-items-center  mt-5 mb-4">
+          <div class="payment-step">2</div>
+          <h3 class="main-color fs-5 m-0">Payment</h3>
+        </div>
+      </div>
+      <div class="col-4 d-flex flex-column align-items-end right-sec gap-4">
+        <div class="bg-white px-4 py-3 col-11 ">
+          <h2 class="mb-4">Payment Summary</h2>
+          <div class="sub-total d-flex justify-content-between mb-3">
+            <h4 class="m-0">Subtotal</h4>
+            <bdi ><span class="fs-5 fw-bold">157,997</span>&nbsp;<span>EGP</span></bdi>
+          </div>
+          <div class="shipping">
+            <h3 class="mb-2">Shipping</h3>
+            <div class="d-flex align-items-center">
+              <input [ngClass]="{'fw-bold': homeDelivery.checked }" type="radio" name="shipping" id="free" [checked]="homeDelivery.checked">
+              <label class="fs-6 ms-2" for="free">Free shipping</label>
+            </div>
+            <div class="d-flex align-items-center">
+              <input type="radio" name="shipping" id="pickup" [checked]="!homeDelivery.checked" >
+              <label [ngClass]="{'fw-bold':!homeDelivery.checked }" class="fs-6 ms-2" for="pickup">Pickup Store</label>
+            </div>
+          </div>
+          <div class="total d-flex justify-content-between mb-2">
+            <h4 class="m-0">Total</h4>
+            <bdi ><span class="fs-5 fw-bold">157,997</span>&nbsp;<span>EGP</span></bdi>
+          </div>
+        </div>
+        <div class="bg-white px-4 py-3 col-11 ">
+          <h2 class="mb-1">Products</h2>
+          <p class="fs-6">3 items in your order</p>
+        <div class="products">
+          <div class="cart-item d-flex gap-2 py-3 px-2">
+            <img src="/assets/Images/Products/Samsung-Galaxy-S23-Ultra-Dual-SIM-256GB-12GB-RAM_Samsung_4302_2-1-441x441.png" alt="product Image" style="width: 80px;">
+            <div class="flex-grow-1">
+              <a class="nav-link">product Name</a>
+              <div class="d-flex justify-content-between mb-3 mt-2">
+                <bdi ><span class="fs-5 fw-bold">157,997</span>&nbsp;<span>EGP</span></bdi>
+                <p class="m-0">Qty. 1</p>
+              </div>
+            </div>
+          </div>
+          <div class="cart-item d-flex gap-2 py-3 px-2">
+            <img src="/assets/Images/Products/1658468-990x990.webp" alt="product Image" style="width: 80px;">
+            <div class="flex-grow-1">
+              <a class="nav-link">product Name</a>
+              <div class="d-flex justify-content-between mb-3 mt-2">
+                <bdi ><span class="fs-5 fw-bold">157,997</span>&nbsp;<span>EGP</span></bdi>
+                <p class="m-0">Qty. 1</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer> <div class="container py-4">2024 &copy; Dubai Phone. All right reserved.</div></footer>

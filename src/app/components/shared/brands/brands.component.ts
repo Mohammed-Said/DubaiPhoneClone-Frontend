@@ -1,5 +1,5 @@
 import { Component,Input } from '@angular/core';
-import { CardSliderComponent } from '../card-slider/card-slider.component';
+
 import { CommonModule } from '@angular/common';
 import { IBrand } from '../../../Models/ibrand';
 import { RouterModule } from '@angular/router';
@@ -8,7 +8,7 @@ import { CarouselModule } from 'primeng/carousel';
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [CardSliderComponent,CommonModule,RouterModule,CarouselModule],
+  imports: [CommonModule,RouterModule,CarouselModule],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css'
 })

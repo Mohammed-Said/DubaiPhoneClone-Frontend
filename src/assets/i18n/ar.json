@@ -1,0 +1,187 @@
+{
+  "language": "ENGLISH",
+  "nav": {
+    "mobiles": {
+      "apple": "ابل",
+      "samsung": "سامسونج",
+      "oppo": "اوبو",
+      "vivo": "فيفو",
+      "realme": "ريلمي",
+      "xiaomi": "شاومي",
+      "honor": "هونر",
+      "huawei": "هواوي",
+      "infinix": "انفنكس"
+    },
+    "tablets": {
+      "ipad": "ايباد",
+      "samsung": "تابلت سامسونج",
+      "realme": "تابلت ريلمي",
+      "lenovo": "لينوفو",
+      "huawei": "تابلت هواوي",
+      "tcl": "تي سي ال"
+    },
+    "laptops": {
+      "asus": "لابتوب اسوس",
+      "dell": "لابتوب ديل",
+      "hp": "لابتوب اتش بي",
+      "lenovo": "لابتوب لينوفو",
+      "apple": "ماك بوك"
+    },
+    "printers": {
+      "hp": "برنترات اتش بي",
+      "epson": "برنترات ابسون"
+    },
+    "tvs": {
+      "samsung": "تلفزيونات سامسونج",
+      "lg": "تلفزيونات ال جي",
+      "Rowa": "شاشات روي",
+      "castle": "كاسل",
+      "ata": "ايه تي ايه",
+      "ultra": "الترا"
+    },
+    "monitors": {
+      "lg": "شاشات ال جي"
+    },
+    "games": {
+      "playstation": "بلايستيشن",
+      "cds": "اسطوانات العاب",
+      "accessories": "اكسسوارات الالعاب",
+      "headset": "سماعة الألعاب",
+      "mouse": "كيبورد & ماوس الألعاب",
+      "scooters": "سكوتر"
+    },
+    "mobileAccessories": {
+      "watch": "ساعات ذكيه",
+      "sound": "سماعات لاسلكيه",
+      "powerBank": "باور بنك",
+      "cables": "كابلات & شواحن",
+      "covers": "جرابات",
+      "screen": "اسكرينات",
+      "headset": "سماعات رأس للموبايل"
+    },
+    "laptopsAccessories": {
+      "bag": "شنط",
+      "keyboard": "كيبورد & ماوس",
+      "flash": "فلاشات-بطاقة ذاكره",
+      "power": "ملحقات الطاقة",
+      "Sound": "سماعات رأس"
+    },
+    "otherAccessories": {
+      "home": "أجهزة منزلية",
+      "care": "ادوات العناية الشخصية",
+      "Speakers": "مكبرات صوت",
+      "health": "عنايه صحيه",
+      "car": "اكسسوارات سيارات",
+      "others": "اخري"
+    },
+    "kitchen": {
+      "air": "اير فراير",
+      "microwaves": "ميكروويف",
+      "waffle": "الخلاطات",
+      "blenders": "ماكينة الوافل والسندوتشات",
+      "kettle": " ماكينة القهوة و السخانات"
+    },
+    "small": {
+      "vacuum": "دفايات كهربائية",
+      "irons": "مكاوي",
+      "heater": "مكانس كهربائية"
+    },
+    "mainBrands": {
+      "apple": "ابل",
+      "samsung": "سامسونج",
+      "lenovo": "ال جي",
+      "huawei": "هواوي",
+      "lg": "شاومي",
+      "xiaomi": "لينوفو",
+      "oppo": "اوبو"
+    },
+    "otherBrands": {
+      "dell": "ديل",
+      "hp": "اتش بي",
+      "acer": "آيسر",
+      "sony": "سوني",
+      "anker": "انكر",
+      "asus": "اسوس",
+      "honor": "اونر"
+    },
+    "mainTitles": {
+      "title1": " موبايلات و تابلت",
+      "title2": "لاب توب و طابعات",
+      "title3": "تلفزيونات و شاشات",
+      "title4": "العاب",
+      "title5": "اكسسوارات",
+      "title6": "منتجات المنزل",
+      "title7": "الماركات"
+    },
+    "subTitles": {
+      "title1": "موبايل",
+      "title2": "تابلت",
+      "title3": "لاب توب",
+      "title4": "طابعات",
+      "title5": "تلفزيونات",
+      "title6": "شاشات",
+      "title7": "العاب",
+      "title8": "اكسسوارت الموبايل",
+      "title9": "اكسسوارات لابتوب",
+      "title10": "اكسسوارات اخري",
+      "title11": "منتجات المطبخ",
+      "title12": "اجهزة منزلية صغيرة",
+      "title13": "الماركات",
+      "title14": "مركات اخري"
+    }
+  },
+  "currency": "جنية",
+  "header": {
+    "lastPiece": "القطعة الأخيرة",
+    "login": "تسجيل الدخول",
+    "shoppingCart": " عربة التسوق ",
+    "placeholder": "....بحث عن المنتجات",
+    "whatsapp": "دعم من خلال الواتساب",
+    "stores": "أماكن الفروع",
+    "shipping": "شحن مجاني للطلبات اكثر من"
+  },
+  "landing": {
+    "banner": [
+      "ar/freeclip-banner-ar-web-copy.webp",
+      "ar/cib-ar-copy.webp",
+      "ar/s24-banner-ar-web-copy.webp",
+      "ar/misr-ar-924-copy-ar.webp",
+      "ar/nbe-banner-ar-18-copy.webp",
+      "ar/home-aman-ar-copy.webp",
+      "ar/qnb-ar-banner-222-copy.webp",
+      "ar/alex-banner-ar-web-copy.webp",
+      "ar/adib-banner-ar-web-copy.webp",
+      "ar/copy-ar.webp"
+    ],
+    "subBanner": {
+      "banner1": "ar/souhoola-banne-ar-c000py-1.webp",
+      "banner2": "ar/banner-ar-copy.webp"
+    }
+  },
+  "home":{
+    "sectionImages":{
+      "hurryUp":"ar/x7b-bundle-ar-copy.webp",
+      "newArrival":"ar/reno-11-ar-copy.webp",
+      "apple":"ar/apple-sec.webp",
+      "laptop":"ar/asus-g16-ar-copy.webp",
+      "watch":"ar/gt4-ar-des-copy.webp",
+      "home":"ar/home-banner-ar-web-coooopy.webp",
+      "sound":"ar/free-clip-copy-ar.webp"
+    },
+    "title":{
+      "newArrival":"وصل حديثاََ",
+      "apple":"ابل",
+      "laptop":"لابتوبات",
+      "watch":"ساعات ذكية",
+      "home":"المنتجات المنزلية",
+      "sound":"عروض السماعات"
+    }
+    ,
+    "btn":"المزيد من"
+  },
+  "card":{
+    "sale":"!تخفيض",
+    "btn":"إضافة إلي السلة"
+  }
+
+}
