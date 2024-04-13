@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CartService } from '../../Services/cartServices/cart.service';
+import { IProductCart } from '../../Models/CartItem/iproduct-cart';
 
 @Component({
   selector: 'app-checkout',
@@ -9,6 +11,17 @@ import { Component } from '@angular/core';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
+  cart:IProductCart[]=[];
+  constructor(private _cartService: CartService) {
+    _cartService.getCartProducts().subscribe(products => {
+      this.cart = products;
+      _cartService.AddQuantity(this.cart);
+    });
+  }
+  createRange(number:number){
+    // return new Array(number);
+    return new Array(number);
+  }
   ShippingMethod(e:Event){
     ((e.currentTarget as HTMLElement).querySelector('input') as HTMLInputElement ).checked=true;
     ((e.currentTarget as HTMLElement).parentElement as HTMLElement).querySelectorAll('.shipping-method > div').forEach(d=>{

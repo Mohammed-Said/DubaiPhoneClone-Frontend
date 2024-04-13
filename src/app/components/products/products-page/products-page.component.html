@@ -14,7 +14,9 @@
             >Home</a
           >
         </li>
-        <li class="breadcrumb-item">
+        @if (firstPartUrl===undefined) {
+
+        <li class="breadcrumb-item active">
           <a
             [routerLink]="['/', mainUrl]"
             routerLinkActive="router-link-active"
@@ -22,7 +24,16 @@
             >{{ mainUrl }}</a
           >
         </li>
-        @if (SecondPartUrl===undefined) {
+      }
+        @else if (SecondPartUrl===undefined) {
+          <li class="breadcrumb-item ">
+            <a
+              [routerLink]="['/', mainUrl]"
+              routerLinkActive="router-link-active"
+              class="text-dark text-decoration-none"
+              >{{ mainUrl }}</a
+            >
+          </li>
         <li class="breadcrumb-item active">
           {{ firstPartUrl }}
         </li>
@@ -46,8 +57,12 @@
 </section>
 <main class="pt-1">
   <div class="page-header fs-2">
-    <app-brands [isSmall]="true" [brands]="brands"></app-brands>
-    <!-- <app-categories [Categories]="categories"></app-categories> -->
+    @if(mainUrl==='brand') {
+      <app-categories [Categories]="categories"></app-categories>
+    }
+    @else {
+      <app-brands [isSmall]="true" [brands]="brands"></app-brands>
+    }
   </div>
   <div class="container mx-auto mt-5">
     <div class="page-grid pt-5">
