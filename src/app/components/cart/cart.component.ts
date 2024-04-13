@@ -1,17 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component, Pipe } from '@angular/core';
-
+import { Component, OnInit, Pipe } from '@angular/core';
+import { CartService } from '../../Services/cartServices/cart.service';
+import { ProductService } from '../../Services/productServices/product.service';
+import { IProductCart } from '../../Models/CartItem/iproduct-cart';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrl: './cart.component.css',
 })
-export class CartComponent {
-public cartitems:number=2
-public itemname:string="Xiaomi Redmi Note 13 Dual Sim - 256GB, 8GB Ram, 4G - Black"
-public price:number=10.777
-public imagelink:string="https://th.bing.com/th/id/R.69a3d58caa03e7d79b904798030b545c?rik=Hm8sIx89ARlERA&pid=ImgRaw&r=0"
+export class CartComponent  {
+  cart:IProductCart[]=[];
+  constructor(private _cartService: CartService) {
+    _cartService.getCartProducts().subscribe(products => {
+      this.cart = products;
+      _cartService.AddQuantity(this.cart);
+    });
+  }
+  createRange(number:number){
+    // return new Array(number);
+    return new Array(number);
+  }
+
 }

@@ -4,8 +4,9 @@ import { IUser } from '../../Models/user/iuser';
 import { ICartItem } from '../../Models/CartItem/icart-item';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IProductCart } from '../../Models/CartItem/iproduct-cart';
+import { ProductService } from '../productServices/product.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,19 +16,19 @@ export class CartService {
   private cart: ICartItem[] = [];
   constructor(
     private _userService: UserService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private _productService: ProductService
   ) {
     this.URL = environment.serverURL + '/api/cart';
     if (localStorage.getItem('cart'))
       this.cart = JSON.parse(localStorage.getItem('cart') as string);
     if (_userService.userState)
       this.getUserCart(_userService.User?.nameidentifier as string);
-
   }
 
   addToCart(id: number) {
     let indexProdInCart = this.cart.findIndex((val) => val.productId === id);
-    console.log('before',this.cart);
+    console.log('before', this.cart);
 
     let cartItem: ICartItem;
 
@@ -39,11 +40,10 @@ export class CartService {
       this.cart.push(cartItem);
     } else {
       this.cart[indexProdInCart].quantity++;
-      cartItem ={... this.cart[indexProdInCart]};
+      cartItem = { ...this.cart[indexProdInCart] };
     }
 
-    if (this._userService.userState)
-    {
+    if (this._userService.userState) {
       cartItem.userId = this._userService.User?.nameidentifier;
       this.addCartToApi(cartItem);
     }
@@ -73,10 +73,32 @@ export class CartService {
             } else this.cart[indexProdInCart].quantity = cartItem.quantity;
           });
           this.addCartToMemory();
-        }
+        },
       });
   }
-  getCartProducts(id: string): Observable<IProductCart[]> {
-    return this.httpClient.get<IProductCart[]>(this.URL + '/GetCartProducts?userId=' + id);
+  getCartProducts() {
+    if (this._userService.userState) {
+      const id = this._userService.User?.nameidentifier;
+      return this.httpClient.get<IProductCart[]>(
+        this.URL + '/GetCartProductsByUser?userId=' + id
+      );
+    }
+    let arr: number[] = this.cart.map((item) => item.productId);
+    return this.httpClient.get<IProductCart[]>(
+      this.URL + '/GetCartProducts?ids=' + arr.join('&ids=')
+    );
+  }
+  AddQuantity(products:IProductCart[]){
+    products.forEach((p) =>
+      {
+        let indexProdInCart = this.cart.findIndex(
+          (val) => val.productId === p.productId
+        );
+        if (indexProdInCart === -1) {
+          p.quantity=1;
+        }
+        else  p.quantity= this.cart[indexProdInCart].quantity ;
+      }
+    );
   }
 }

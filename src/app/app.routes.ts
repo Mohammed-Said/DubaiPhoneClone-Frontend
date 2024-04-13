@@ -9,7 +9,7 @@ import { LoginComponent } from './components/user/login/login.component';
 
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
-import { CardComponent } from './components/shared/card/card.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export const routes: Routes = [
 
@@ -17,7 +17,7 @@ export const routes: Routes = [
     {path:"sign up",component:SignupComponent,title:"sign up"},
     {path:"login",component:LoginComponent,title:"login"},
     {path:"checkout",component:CheckoutComponent},
-    {path:"cart",component:CardComponent},
+    {path:"cart",component:CartComponent},
     {path:"category" ,component:ProductsPageComponent,children:[
       {path:":category",component:ProductsPageComponent},
       {path:":category/:brand",component:ProductsPageComponent},
