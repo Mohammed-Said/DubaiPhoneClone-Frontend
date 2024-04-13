@@ -43,7 +43,7 @@
           <span>Subtotal</span>
         </div>
         <div class="col-4">
-          <b>{{price|currency}}</b>
+          <b>{{subTotal |currency:"EGP"}}</b>
         </div>
       </div>
       <div class="row justify-content-between">
@@ -61,7 +61,7 @@
           <span>Total</span>
         </div>
         <div class="col-6">
-          <b class="text-primary">You save - {{price|currency:"EGP"}}</b>
+          <b class="text-primary">You save - {{(fakeTotal-subTotal)|currency:"EGP"}}</b>
         </div>
       </div>
       <div class="row">

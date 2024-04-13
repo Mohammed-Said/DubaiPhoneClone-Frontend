@@ -12,11 +12,19 @@ import { IProductCart } from '../../Models/CartItem/iproduct-cart';
   styleUrl: './cart.component.css',
 })
 export class CartComponent  {
+  fakeTotal: number=0;
+  subTotal: number = 0;
   cart:IProductCart[]=[];
   constructor(private _cartService: CartService) {
     _cartService.getCartProducts().subscribe(products => {
       this.cart = products;
       _cartService.AddQuantity(this.cart);
+      this.cart.forEach(item=>
+        {
+          this.subTotal+= item.salePrice * item.quantity;
+          this.fakeTotal+= item.normalPrice * item.quantity
+        }
+      )
     });
   }
   createRange(number:number){
