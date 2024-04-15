@@ -153,13 +153,13 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title5' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.tvs |keyvalue; track $index) {
+            @for (item of navData?.tvs |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
                 [routerLink]="['/category/tvs']"
                 routerLinkActive="router-link-active" (click)="closeMenu()"
-                >{{'nav.tvs.'+item.key | translate}}</a
+                >{{'nav.tvs.'+item?.key | translate}}</a
               >
             </li>
             }
@@ -168,13 +168,13 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title6' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.monitors |keyvalue; track $index) {
+            @for (item of navData?.monitors |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
                 [routerLink]="['/category/tvs']"
                 routerLinkActive="router-link-active" (click)="closeMenu()"
-                >{{'nav.monitors.'+item.key | translate}}</a
+                >{{'nav.monitors.'+item?.key | translate}}</a
               >
             </li>
             }
@@ -187,7 +187,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title7' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.games |keyvalue; track $index) {
+            @for (item of navData?.games |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
@@ -206,7 +206,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title8' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.mobileAccessories |keyvalue; track $index) {
+            @for (item of navData?.mobileAccessories |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
@@ -221,7 +221,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title9' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.laptopsAccessories |keyvalue; track $index) {
+            @for (item of navData?.laptopsAccessories |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
@@ -236,7 +236,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title10' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.otherAccessories |keyvalue; track $index) {
+            @for (item of navData?.otherAccessories |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
@@ -255,7 +255,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title11' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.kitchen |keyvalue; track $index) {
+            @for (item of navData?.kitchen |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
@@ -270,7 +270,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title12' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.small |keyvalue; track $index) {
+            @for (item of navData?.small |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
@@ -289,7 +289,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title13' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.mainBrands |keyvalue; track $index) {
+            @for (item of navData?.mainBrands |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
@@ -305,7 +305,7 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title14' | translate}}</h4>
           <ul class="list-unstyled">
-            @for (item of navData.otherBrands |keyvalue; track $index) {
+            @for (item of navData?.otherBrands |keyvalue; track $index) {
             <li class="p-2">
               <a
                 class="nav-link"
