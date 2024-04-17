@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './components/products/product-details/p
 import { CartComponent } from './components/cart/cart.component';
 import { ShippingComponent } from './components/checkout/shipping/shipping.component';
 import { PaymentComponent } from './components/checkout/payment/payment.component';
+import { WishlistComponent } from './components/shared/wishlist/wishlist.component';
 
 export const routes: Routes = [
 
@@ -31,6 +32,7 @@ export const routes: Routes = [
       {path:":brand",component:ProductsPageComponent},
     ]},
     {path:"product/:name",component:ProductDetailsComponent},
+    {path:"wishlist",component:WishlistComponent},
     {path:"not-found",component:NotFoundComponent},
     {path:"**",redirectTo:"not-found"}
 ];
