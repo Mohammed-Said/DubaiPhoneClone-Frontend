@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../userService/user.service';
-import { IUser } from '../../Models/user/iuser';
 import { ICartItem } from '../../Models/CartItem/icart-item';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
 import { IProductCart } from '../../Models/CartItem/iproduct-cart';
-import { ProductService } from '../productServices/product.service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +15,6 @@ export class CartService {
   constructor(
     private _userService: UserService,
     private httpClient: HttpClient,
-    private _productService: ProductService
   ) {
     this.URL = environment.serverURL + '/api/cart';
     if (localStorage.getItem('cart'))
@@ -28,8 +25,6 @@ export class CartService {
 
   addToCart(id: number) {
     let indexProdInCart = this.cart.findIndex((val) => val.productId === id);
-    console.log('before', this.cart);
-
     let cartItem: ICartItem;
 
     if (indexProdInCart === -1) {
@@ -47,7 +42,7 @@ export class CartService {
       cartItem.userId = this._userService.User?.nameidentifier;
       this.addCartToApi(cartItem);
     }
-    console.log(this.cart);
+
     this.addCartToMemory();
   }
   private addCartToMemory() {
@@ -56,8 +51,8 @@ export class CartService {
   private addCartToApi(item: ICartItem) {
     this.httpClient.post<ICartItem>(this.URL, item).subscribe();
   }
-  async getUserCart(id: string) {
-    await this.httpClient
+  getUserCart(id: string) {
+    this.httpClient
       .get<ICartItem[]>(this.URL + '/GetUserCart?userId=' + id)
       .subscribe({
         next: (result) => {
@@ -88,17 +83,14 @@ export class CartService {
       this.URL + '/GetCartProducts?ids=' + arr.join('&ids=')
     );
   }
-  AddQuantity(products:IProductCart[]){
-    products.forEach((p) =>
-      {
-        let indexProdInCart = this.cart.findIndex(
-          (val) => val.productId === p.productId
-        );
-        if (indexProdInCart === -1) {
-          p.quantity=1;
-        }
-        else  p.quantity= this.cart[indexProdInCart].quantity ;
-      }
-    );
+  AddQuantity(products: IProductCart[]) {
+    products.forEach((p) => {
+      let indexProdInCart = this.cart.findIndex(
+        (val) => val.productId === p.productId
+      );
+      if (indexProdInCart === -1) {
+        p.quantity = 1;
+      } else p.quantity = this.cart[indexProdInCart].quantity;
+    });
   }
 }

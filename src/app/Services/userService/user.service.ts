@@ -6,11 +6,10 @@ import { IUser } from '../../Models/user/iuser';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ICreatingUser } from '../../Models/user/icreating-user';
 import { IUpdatedUser } from '../../Models/user/iupdated-user';
-import { GetOrder } from '../../Models/Order/get-order';
 import { Ilogin } from '../../Models/user/ilogin';
 import { Router } from '@angular/router';
 import { JwtDecoderService } from '../tokenService/jwt-decoder.service';
-import { Token } from '@angular/compiler';
+
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +39,6 @@ export class UserService {
     return this.isUserLoggedIn;
   }
 
-
   get User() {
     if(this.userState)
       return this.user;
@@ -63,7 +61,6 @@ export class UserService {
     localStorage.removeItem('token');
     this.isUserLoggedIn.next(false);
   }
-
   registration(user: ICreatingUser) {
     // debugger;
     console.log(this.AccountURL + '/SignUp', user);
@@ -76,19 +73,11 @@ export class UserService {
         },
       });
   }
-
   addToMyWishList(LovedProductId: number): Observable<any> {
     return this.httpClient.patch(
       this.URL + `/additemtomywishlist/${LovedProductId}`,
       {}
     );
-  }
-
-  getMyOrders(): Observable<GetOrder[]> {
-    return this.httpClient.get<GetOrder[]>(this.URL + `/myorders`);
-  }
-  getUserOrders(userId: number): Observable<GetOrder[]> {
-    return this.httpClient.get<GetOrder[]>(this.URL + `/orders/${userId}`);
   }
   getMyData(): Observable<IUser> {
     return this.httpClient.get<IUser>(this.URL + `/myprofile`);

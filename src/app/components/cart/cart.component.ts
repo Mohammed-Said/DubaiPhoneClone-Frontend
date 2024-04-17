@@ -14,6 +14,7 @@ import { IProductCart } from '../../Models/CartItem/iproduct-cart';
 export class CartComponent  {
   fakeTotal: number=0;
   subTotal: number = 0;
+
   cart:IProductCart[]=[];
   constructor(private _cartService: CartService) {
     _cartService.getCartProducts().subscribe(products => {
