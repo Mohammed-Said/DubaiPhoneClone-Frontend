@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { IProductCart } from '../../Models/CartItem/iproduct-cart';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +13,7 @@ export class CartService {
   private cart: ICartItem[] = [];
   constructor(
     private _userService: UserService,
-    private httpClient: HttpClient,
+    private httpClient: HttpClient
   ) {
     this.URL = environment.serverURL + '/api/cart';
     if (localStorage.getItem('cart'))
@@ -92,5 +91,21 @@ export class CartService {
         p.quantity = 1;
       } else p.quantity = this.cart[indexProdInCart].quantity;
     });
+  }
+  updateCart(id: number, quantity: number) {
+    console.log(quantity);
+    let indexProdInCart = this.cart.findIndex((val) => val.productId === id);
+    if (indexProdInCart !== -1) {
+      let cartItem: ICartItem = this.cart[indexProdInCart];
+      if (quantity===0)
+        this.cart.splice(indexProdInCart, 1);
+
+      if (this._userService.userState) {
+        cartItem.userId = this._userService.User?.nameidentifier;
+        cartItem.quantity = quantity;
+        this.addCartToApi(cartItem);
+      }
+      this.addCartToMemory();
+    }
   }
 }

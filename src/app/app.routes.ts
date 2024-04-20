@@ -13,6 +13,13 @@ import { CartComponent } from './components/cart/cart.component';
 import { ShippingComponent } from './components/checkout/shipping/shipping.component';
 import { PaymentComponent } from './components/checkout/payment/payment.component';
 import { WishlistComponent } from './components/shared/wishlist/wishlist.component';
+import { AccountComponent } from './components/account/account.component';
+import { DashboardComponent } from './components/account/dashboard/dashboard.component';
+import { OrdersComponent } from './components/account/orders/orders.component';
+import { MywishlistComponent } from './components/account/mywishlist/mywishlist.component';
+import { CouponsComponent } from './components/account/coupons/coupons.component';
+import { AddressesComponent } from './components/account/addresses/addresses.component';
+import { AccountDetailsComponent } from './components/account/account-details/account-details.component';
 
 export const routes: Routes = [
 
@@ -33,6 +40,15 @@ export const routes: Routes = [
     ]},
     {path:"product/:name",component:ProductDetailsComponent},
     {path:"wishlist",component:WishlistComponent},
+    {path:"account",component:AccountComponent,children:[
+      {path:"dashboard",component:DashboardComponent},
+      {path:"orders",component:OrdersComponent},
+      {path:"my-wishlist",component:WishlistComponent},
+      {path:"coupons",component:CouponsComponent},
+      {path:"edit-address",component:AddressesComponent},
+      {path:"edit-account",component:AccountDetailsComponent},
+    ]},
+
     {path:"not-found",component:NotFoundComponent},
     {path:"**",redirectTo:"not-found"}
 ];

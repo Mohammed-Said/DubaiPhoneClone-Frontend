@@ -1,6 +1,6 @@
 export interface IUser {
     nameidentifier:string
-    username :string
+    name :string
     firstname? :string
     lastname? :string
     emailaddress :string

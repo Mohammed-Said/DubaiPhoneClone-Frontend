@@ -31,10 +31,7 @@ export class ShippingComponent   {
   ) {
 
     if (_orderService.order!==undefined)
-      {
         this.order=_orderService.order;
-
-      }
 
     this.shippingInfo = new FormGroup({
       firstName: new FormControl(this.order.firstName, [Validators.required]),

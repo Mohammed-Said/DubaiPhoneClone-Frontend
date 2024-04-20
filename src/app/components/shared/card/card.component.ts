@@ -33,6 +33,7 @@ this.localizationService.IsArabic.subscribe(ar=>this.isArabic=ar);
 }
 
 removeFromWishlist(){
+
   this._wishlistService.updateWishlist(this.product.id);
  (((this.cardRef.nativeElement as HTMLElement).parentElement)as HTMLElement).remove();
 }

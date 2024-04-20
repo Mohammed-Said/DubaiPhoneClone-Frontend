@@ -28,6 +28,7 @@ export class UserService {
 
     if (this.userState) {
       this.user=jwtService.decodeToken(localStorage.getItem('token') as string);
+      console.log(this.user);
     }
   }
 

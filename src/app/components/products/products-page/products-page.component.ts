@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { CardComponent } from '../../shared/card/card.component';
 import { BrandsComponent } from '../../shared/brands/brands.component';
@@ -19,6 +27,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { delay } from 'rxjs';
 import { IProduct } from '../../../Models/product/iproduct';
 import { IPagination } from '../../../Models/ipagination';
+import { TranslateModule } from '@ngx-translate/core';
+import { LocalizationService } from '../../../Services/localiztionService/localization.service';
 
 @Component({
   selector: 'app-products-page',
@@ -36,10 +46,10 @@ import { IPagination } from '../../../Models/ipagination';
     MatRadioModule,
     MatSliderModule,
     MatCheckboxModule,
-
+    TranslateModule
   ],
 })
-export class ProductsPageComponent implements OnInit ,AfterViewInit{
+export class ProductsPageComponent implements OnInit, AfterViewInit {
   categories: ICategory[] = [];
   brands: IBrand[] = [];
   mainUrl: string = '';
@@ -52,20 +62,38 @@ export class ProductsPageComponent implements OnInit ,AfterViewInit{
     { name: 'Sort by name: ascending', value: 3 },
     { name: 'Sort by name: descending', value: 4 },
   ];
+  sortsAR: any[] = [
+    { name: 'ترتيب حسب: الأدنى سعراً للأعلى', value: 1 },
+    { name: 'ترتيب حسب: الأعلى سعراً للأدنى ', value: 2 },
+    { name: 'ترتيب حسب: الأدنى الاسم للأعلى', value: 3 },
+    { name: 'ترتيب حسب: الأعلى الاسم للأدنى ', value: 4 },
+  ];
 
   selectedSort!: string;
   products: IProduct[] = [];
   @ViewChild('ProductGrid') productGrid!: ElementRef;
   @ViewChild('test') test!: ElementRef;
-
+  @ViewChild('minRef') minRef!: ElementRef;
+  @ViewChild('maxRef') maxRef!: ElementRef;
 
   // infinite scroll
   isLoading: boolean = false;
-  currentPage: number = 1;
-  itemPerPage: number = 3;
-  maxPageNumber!:number;
+  currentPage!: number;
+  itemPerPage!: number;
+  maxPageNumber!: number;
   count!: number;
-  stock!:number;
+  stock!: number;
+  minPrice!: number;
+  maxPrice!: number;
+
+  isArabic!: boolean ;
+
+  isFilterPrice: boolean = false;
+  isFilterStock: boolean = false;
+
+  isOrderBy: boolean = false;
+  criteria!: string;
+  way!: string;
   toggleIsLoading = () => (this.isLoading = !this.isLoading);
 
   constructor(
@@ -73,26 +101,37 @@ export class ProductsPageComponent implements OnInit ,AfterViewInit{
     private router: Router,
     private _brandService: BrandService,
     private _categoryService: CategoryService,
-    private _productService: ProductService
-  ) {}
+    private _productService: ProductService,
+    private localizationService: LocalizationService ) {
+      this.localizationService.IsArabic.subscribe(ar=>this.isArabic=ar);
+  }
   ngAfterViewInit(): void {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting &&!this.isLoading) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !this.isLoading) {
           this.onScroll();
-          if (this.maxPageNumber===this.currentPage) {
+          if (this.maxPageNumber === this.currentPage) {
             observer.unobserve(entry.target);
           }
         }
       });
-    },
-    );
+    });
     observer.observe(this.test.nativeElement);
+
+    this.isOrderBy = false;
+    this.isFilterPrice = false;
+    this.isFilterStock = false;
+
+    this.itemPerPage = 6;
+    this.currentPage = 1;
+
   }
 
-
-
   ngOnInit() {
+
+    this._productService.getMinPrice().subscribe((p) => (this.minPrice = p));
+    this._productService.getMaxPrice().subscribe((p) => (this.maxPrice = p));
+
     this.mainUrl = this.router.url.split('/')[1];
     this.firstPartUrl = this.router.url.split('/')[2];
     this.SecondPartUrl = this.router.url.split('/')[3];
@@ -118,7 +157,6 @@ export class ProductsPageComponent implements OnInit ,AfterViewInit{
       });
       this.routeBrandCheck();
     }
-
   }
 
   handleGrid(e: Event) {
@@ -188,61 +226,81 @@ export class ProductsPageComponent implements OnInit ,AfterViewInit{
       });
     }
   }
-  SortBy(test: any) {
+  OrderBy(test: any) {
+    this.ngAfterViewInit();
+    let criteria = '';
+    let way = '';
+
     switch (test.value) {
       case 1:
-        this.products.sort((a, b) => a.normalPrice - b.normalPrice);
+        criteria = 'price';
+        way = 'ASC';
         break;
       case 2:
-        this.products.sort((a, b) => b.normalPrice - a.normalPrice);
+        criteria = 'price';
+        way = 'DESC';
         break;
       case 3:
-        this.products.sort((a, b) => a.name.localeCompare(b.name));
+        criteria = 'name';
+        way = 'ASC';
         break;
       case 4:
-        this.products.sort((a, b) => b.name.localeCompare(a.name));
+        criteria = 'price';
+        way = 'DESC';
         break;
     }
-  }
 
-////////////////////////////////////////////////////////////////
+    this.criteria = criteria;
+    this.way = way;
 
-//Infinite Scroll Functions
-  loadData()  {
     this.toggleIsLoading();
-    let URLparams:IPagination={
+    this.isOrderBy = true;
+
+    let URLparams: IPagination = {
       numOfProductPerPage: this.itemPerPage,
-      pageNumber: this.currentPage
-    }
+      pageNumber: this.currentPage,
+    };
     this._productService
-      .getProductsPagination(URLparams)
+      .getProductsOrderBy(criteria, way, URLparams)
       .subscribe({
         next: (data: any) => {
           this.products = data.entity;
-          this.maxPageNumber = Math.ceil( data.count /this.itemPerPage);
+          this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
           this.count = data.count;
           this.stock = data.stock;
-        },
-        error: (error) => {
-          console.log(error.message);
         },
         complete: () => {
           this.toggleIsLoading();
         },
       });
-  };
-  appendData(){
+    console.log(this.maxPageNumber);
+    console.log(this.currentPage);
+  }
+  ///////////////////////////////////////////////////////////////
+  //filter
+  //by Price
+  public filterByPrice() {
+    this.ngAfterViewInit();
     this.toggleIsLoading();
-    let URLparams:IPagination={
+    this.isFilterPrice = true;
+
+    const min = Number(this.minRef.nativeElement.value);
+    const max = Number(this.maxRef.nativeElement.value);
+    let URLparams: IPagination = {
       numOfProductPerPage: this.itemPerPage,
-      pageNumber: this.currentPage
-    }
+      pageNumber: this.currentPage,
+    };
     this._productService
-      .getProductsPagination( URLparams)
-      .pipe(delay(3000))
+      .getProductsFilterByPrice(min, max, URLparams)
+      .pipe(delay(2000))
       .subscribe({
         next: (data: any) => {
-          this.products = [...this.products,...data.entity];
+          console.log(data);
+          this.products = data.entity;
+          this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
+          this.count = data.count;
+          this.stock = data.stock;
+          console.log(this.products);
         },
         error: (error) => {
           console.log(error.message);
@@ -252,7 +310,137 @@ export class ProductsPageComponent implements OnInit ,AfterViewInit{
         },
       });
   }
-  onScroll(){
+
+  // by Stock
+  public filterByStock() {
+    this.ngAfterViewInit();
+    this.toggleIsLoading();
+    this.isFilterPrice = false;
+
+    let URLparams: IPagination = {
+      numOfProductPerPage: this.itemPerPage,
+      pageNumber: this.currentPage,
+    };
+    this._productService
+      .getProductsFilterByStock(URLparams)
+      .pipe(delay(2000))
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.products = data.entity;
+          this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
+          this.count = data.count;
+          this.stock = data.stock;
+          console.log(this.products);
+        },
+        error: (error) => {
+          console.log(error.message);
+        },
+        complete: () => {
+          this.toggleIsLoading();
+        },
+      });
+  }
+
+  ////////////////////////////////////////////////////////////////
+
+  //Infinite Scroll Functions
+  loadData() {
+    this.itemPerPage = 6;
+    this.currentPage = 1;
+    this.toggleIsLoading();
+    let URLparams: IPagination = {
+      numOfProductPerPage: this.itemPerPage,
+      pageNumber: this.currentPage,
+    };
+    this._productService.getProductsPagination(URLparams).subscribe({
+      next: (data: any) => {
+        this.products = data.entity;
+        this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
+        this.count = data.count;
+        this.stock = data.stock;
+      },
+      error: (error) => {
+        console.log(error.message);
+      },
+      complete: () => {
+        this.toggleIsLoading();
+      },
+    });
+  }
+  appendData() {
+    this.toggleIsLoading();
+    let URLparams: IPagination = {
+      numOfProductPerPage: this.itemPerPage,
+      pageNumber: this.currentPage,
+    };
+    if (this.isFilterPrice) {
+      const min = Number(this.minRef.nativeElement.value);
+      const max = Number(this.maxRef.nativeElement.value);
+      this._productService
+        .getProductsFilterByPrice(min, max, URLparams)
+        .pipe(delay(2000))
+        .subscribe({
+          next: (data: any) => {
+            this.products = [...this.products, ...data.entity];
+          },
+          error: (error) => {
+            console.log(error.message);
+          },
+          complete: () => {
+            this.toggleIsLoading();
+          },
+        });
+    } else if (this.isFilterStock) {
+      this._productService
+        .getProductsFilterByStock(URLparams)
+        .pipe(delay(2000))
+        .subscribe({
+          next: (data: any) => {
+            this.products = [...this.products, ...data.entity];
+          },
+          error: (error) => {
+            console.log(error.message);
+          },
+          complete: () => {
+            this.toggleIsLoading();
+          },
+        });
+    } else if (this.isOrderBy) {
+      this._productService
+        .getProductsOrderBy(this.criteria, this.way, URLparams)
+        .pipe(delay(2000))
+        .subscribe({
+          next: (data: any) => {
+            this.products = [...this.products, ...data.entity];
+            console.log(this.maxPageNumber);
+            console.log(this.currentPage);
+          },
+          error: (error) => {
+            console.log(error.message);
+          },
+          complete: () => {
+            this.toggleIsLoading();
+          },
+        });
+    } else {
+      this._productService
+        .getProductsPagination(URLparams)
+        .pipe(delay(2000))
+        .subscribe({
+          next: (data: any) => {
+            this.products = [...this.products, ...data.entity];
+          },
+          error: (error) => {
+            console.log(error.message);
+          },
+          complete: () => {
+            this.toggleIsLoading();
+          },
+        });
+    }
+  }
+  onScroll() {
     this.currentPage++;
     this.appendData();
   }
