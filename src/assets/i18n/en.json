@@ -138,7 +138,9 @@
     "placeholder": "Search for Products....",
     "whatsapp": "Whatsapp Support",
     "stores": "Store Locator",
-    "shipping": "Free Delivery on Orders over"
+    "shipping": "Free Delivery on Orders over",
+    "wishlist":"Wishlist",
+    "account":"Account"
   },
   "landing": {
     "banner": [
@@ -182,5 +184,21 @@
   "card":{
     "sale":"Sale!",
     "btn":"Add to Cart"
+  }
+  ,
+  "productsPage":{
+    "home":"Home",
+    "filter":"Filter By",
+    "show":"Showing",
+    "of":"of",
+    "result":"results",
+    "sort":"Sort By",
+    "stock":
+    {
+      "Status":"Stock Status",
+      "all":"Show All",
+      "in":"In Stock"
+    },
+    "price":"Price"
   }
 }

@@ -54,3 +54,19 @@
 .installments{
   background: linear-gradient(85.4deg, #deecf7 0.52%, #eef6fb 100%);
 }
+
+.form-select{
+  background-color: rgb(247,248,249);
+  width: 80px;
+}
+.sale{
+  padding: 5px;
+  width: 70px;
+}
+.badge{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: red;
+  
+}

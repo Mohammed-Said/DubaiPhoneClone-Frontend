@@ -11,6 +11,8 @@ import { ImageModule } from 'primeng/image';
 import { SidebarModule } from 'primeng/sidebar';
 import { IProductDetails } from '../../../Models/product/iproduct-details';
 import { CartService } from '../../../Services/cartServices/cart.service';
+import { IProductCart } from '../../../Models/CartItem/iproduct-cart';
+import { PanelComponent } from './panel/panel.component';
 
 @Component({
   selector: 'app-product-details',
@@ -23,7 +25,7 @@ import { CartService } from '../../../Services/cartServices/cart.service';
     GalleriaModule,
     ImageModule,
     SidebarModule,
-
+    PanelComponent
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
@@ -34,10 +36,15 @@ export class ProductDetailsComponent {
   public product!: IProductDetails;
   public itemId?: number;
   public quantity?: number;
+  public cart:IProductCart[]=[];
+  subTotal:number=0;
+  fakeTotal:number=0
   sub!: Subscription;
   showFiller = false;
+  sidebarVisible1: boolean = false;
   sidebarVisible2: boolean = false;
   sidebarVisible3: boolean = false;
+  cartitemnum:number=this.cart.length;
   constructor(
     private _productService: ProductService,
     private route: Router,
@@ -72,10 +79,33 @@ export class ProductDetailsComponent {
 
   public addtocart() {
     this._cartService.addToCart(this.product.id);
-    // this.sidebarVisible2 = true; // Show sidebar
+     this.getcart() // Show sidebar
+  }
+  public getcart(){
+    this.sidebarVisible1 = true;
+    this._cartService.getCartProducts().subscribe(products => {
+      this.cart = products;
+      this._cartService.AddQuantity(this.cart);
+      this.cart.forEach(item=>
+        {
+          this.subTotal+= item.salePrice * item.quantity;
+          this.fakeTotal+= item.normalPrice * item.quantity
+        }
+      )
+    });
+
+
   }
 
   public onCloseSidebar() {
     this.sidebarVisible2 = false; // Hide sidebar
+  }
+  createRange(number:number){
+    // return new Array(number);
+    return new Array(number);
+  }
+
+  deletecart(id:number){
+    this._cartService.updateCart(id,0);
   }
 }

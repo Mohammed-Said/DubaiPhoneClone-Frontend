@@ -18,7 +18,8 @@ export class OrderService {
     order.userId=this._userService.User?.nameidentifier as string;
     this._httpClient.post<ICreateOrder>(this.URL, order).subscribe();
   }
-  GetUserOrder(id: string) {
-    this._httpClient.get<IOrder[]>(this.URL + `/GetUserOrders?ids=${id}`);
+  GetUserOrder() {
+    const id=this._userService.User?.nameidentifier;
+    return this._httpClient.get<IOrder[]>(this.URL + `/GetUserOrders?id=${id}`);
   }
 }

@@ -12,98 +12,130 @@ import { IProductDetails } from '../../Models/product/iproduct-details';
   providedIn: 'root',
 })
 export class ProductService {
-
   private URL!: string;
   constructor(private httpClient: HttpClient) {
     this.URL = environment.serverURL + '/api/product';
   }
 
-  //Get product
-  // getALLProducts(): Observable<IProduct[]> {
-  //   return this.httpClient.get<IProduct[]>(this.URL);
-  // }
-  // getProductsByCategory(id: number): Observable<IProduct[]> {
-  //   return this.httpClient.get<IProduct[]>(this.URL + '/cat/' + id);
-  // }
-  // getProductsByBrand(id: number): Observable<IProduct[]> {
-  //   return this.httpClient.get<IProduct[]>(this.URL + '/brand/' + id);
-  // }
-  // getProductsByBrandAndCategory(
-  //   catId: number,
-  //   brandId: number
-  // ): Observable<IProduct[]> {
-  //   return this.httpClient.get<IProduct[]>(`${this.URL}/${catId}/${brandId}`);
-  // }
-
   //////////////////////////////////////////////////////////////////////////
   //Pagination
-  getProductsPagination(URLParams:IPagination): Observable<IProduct[]> {
-    let params = new HttpParams();
+  getProductsPagination(URLurlParams: IPagination): Observable<IProduct[]> {
+    let urlParams = new HttpParams();
 
-    params=params.append('numOfProductPerPage',URLParams.numOfProductPerPage)
-    .append('pageNumber',URLParams.pageNumber);
+    urlParams = urlParams
+      .append('numOfProductPerPage', URLurlParams.numOfProductPerPage)
+      .append('pageNumber', URLurlParams.pageNumber);
 
-    if (URLParams.categoryId != undefined)
-      params=params.append('categoryId',URLParams.categoryId);
-    if (URLParams.brandId != undefined)
-      params=params.append('brandId',URLParams.brandId);
+    if (URLurlParams.categoryId != undefined)
+      urlParams = urlParams.append('categoryId', URLurlParams.categoryId);
+    if (URLurlParams.brandId != undefined)
+      urlParams = urlParams.append('brandId', URLurlParams.brandId);
 
-    return this.httpClient.get<IProduct[]>(
-      `${this.URL}/GetProductPagination`,
-      {params:params}
-    );
+    return this.httpClient.get<IProduct[]>(`${this.URL}/GetProductPagination`, {
+      params: urlParams,
+    });
   }
   ////////////////////////////////////////////////////////////
+  //min & max
+
+  getMinPrice(
+    categoryId: number | null=null,
+    brandId: number | null=null
+  ): Observable<number> {
+    let urlParams = new HttpParams();
+
+    if (categoryId != null)
+      urlParams = urlParams.append('categoryId', categoryId);
+    if (brandId != null) urlParams = urlParams.append('brandId', brandId);
+
+    return this.httpClient.get<number>(`${this.URL}/MinPrice`, {
+      params: urlParams,
+    });
+  }
+
+  getMaxPrice( categoryId: number | null=null,brandId: number | null=null): Observable<number> {
+    let urlParams = new HttpParams();
+
+    if (categoryId != null)
+      urlParams = urlParams.append('categoryId', categoryId);
+    if (brandId != null) urlParams = urlParams.append('brandId', brandId);
+
+    return this.httpClient.get<number>(`${this.URL}/MaxPrice`, {
+      params: urlParams,
+    });
+  }
+
+
+
+  ////////////////////////////////////////////////////////////
   //OrderBy
-  getProductsOrderBy(criteria: string, way: string,URLParams:IPagination): Observable<IProduct[]> {
-    let params = new HttpParams();
+  getProductsOrderBy(
+    criteria: string,
+    way: string,
+    URLurlParams: IPagination
+  ): Observable<IProduct[]> {
+    let urlParams = new HttpParams();
 
-    params=params.append('numOfProductPerPage',URLParams.numOfProductPerPage)
-    .append('pageNumber',URLParams.pageNumber);
+    urlParams = urlParams
+      .append('numOfProductPerPage', URLurlParams.numOfProductPerPage)
+      .append('pageNumber', URLurlParams.pageNumber);
 
-    if (URLParams.categoryId != undefined)
-      params=params.append('categoryId',URLParams.categoryId);
-    if (URLParams.brandId != undefined)
-      params=params.append('brandId',URLParams.brandId);
+    if (URLurlParams.categoryId != undefined)
+      urlParams = urlParams.append('categoryId', URLurlParams.categoryId);
+    if (URLurlParams.brandId != undefined)
+      urlParams = urlParams.append('brandId', URLurlParams.brandId);
 
     if (criteria === 'price')
       return this.httpClient.get<IProduct[]>(
-        `${this.URL}/OrderByPrice?way=${way}`,{params:params}
+        `${this.URL}/OrderByPrice?way=${way}`,
+        { params: urlParams }
       );
     return this.httpClient.get<IProduct[]>(
-      `${this.URL}/OrderByName?way=${way}`,{params:params}
+      `${this.URL}/OrderByName?way=${way}`,
+      { params: urlParams }
     );
   }
   ///////////////////////////////////////////////////////////////////////////
   //filterByPrice
-  getProductsFilterByPrice(min: number,max: number,URLParams:IPagination): Observable<IProduct[]> {
+  getProductsFilterByPrice(
+    min: number,
+    max: number,
+    URLurlParams: IPagination
+  ): Observable<IProduct[]> {
+    let urlParams = new HttpParams();
 
-    let params = new HttpParams();
+    urlParams = urlParams
+      .append('numOfProductPerPage', URLurlParams.numOfProductPerPage)
+      .append('pageNumber', URLurlParams.pageNumber)
+      .append('min', min)
+      .append('max', max);
+    if (URLurlParams.categoryId != undefined)
+      urlParams = urlParams.append('categoryId', URLurlParams.categoryId);
+    if (URLurlParams.brandId != undefined)
+      urlParams = urlParams.append('brandId', URLurlParams.brandId);
 
-    params=params.append('numOfProductPerPage',URLParams.numOfProductPerPage)
-    .append('pageNumber',URLParams.pageNumber);
-
-    if (URLParams.categoryId != undefined)
-      params=params.append('categoryId',URLParams.categoryId);
-    if (URLParams.brandId != undefined)
-      params=params.append('brandId',URLParams.brandId);
-    return this.httpClient.get<IProduct[]>(`${this.URL}/FilterByPrice?min=${min}&max=${max}`,{params:params});
+    return this.httpClient.get<IProduct[]>(
+      `${this.URL}/FilterByPrice`,
+      { params: urlParams }
+    );
   }
   //////////////////////////////////////////////////////////////////////////////
   //filterByStock
-  getProductsFilterByStock(URLParams:IPagination): Observable<IProduct[]> {
+  getProductsFilterByStock(URLurlParams: IPagination): Observable<IProduct[]> {
+    let urlParams = new HttpParams();
 
-    let params = new HttpParams();
+    urlParams = urlParams
+      .append('numOfProductPerPage', URLurlParams.numOfProductPerPage)
+      .append('pageNumber', URLurlParams.pageNumber);
 
-    params=params.append('numOfProductPerPage',URLParams.numOfProductPerPage)
-    .append('pageNumber',URLParams.pageNumber);
+    if (URLurlParams.categoryId != undefined)
+      urlParams = urlParams.append('categoryId', URLurlParams.categoryId);
+    if (URLurlParams.brandId != undefined)
+      urlParams = urlParams.append('brandId', URLurlParams.brandId);
 
-    if (URLParams.categoryId != undefined)
-      params=params.append('categoryId',URLParams.categoryId);
-    if (URLParams.brandId != undefined)
-      params=params.append('brandId',URLParams.brandId);
-
-    return this.httpClient.get<IProduct[]>(`${this.URL}/FilterByStock`,{params:params});
+    return this.httpClient.get<IProduct[]>(`${this.URL}/FilterByStock`, {
+      params: urlParams,
+    });
   }
   //////////////////////////////////////////////////////////////////////////////////////////
   getProductsByName(name: string): Observable<IProduct[]> {
@@ -119,6 +151,4 @@ export class ProductService {
   getProductsCountByBrand(id: number): Observable<IProduct[]> {
     return this.httpClient.get<IProduct[]>(this.URL + '/catCount/' + id);
   }
-
 }
-

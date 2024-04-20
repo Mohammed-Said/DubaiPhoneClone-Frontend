@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light p1">
   <div class="container-fluid" [ngClass]="{'arabic': isArabic}">
-    <a class="navbar-brand fs-6 d-flex" href="#" [ngClass]="{'arabic': isArabic}">
+    <a class="navbar-brand fs-6 d-flex"  [ngClass]="{'arabic': isArabic}">
       <i class="fa-solid fa-truck-fast mx-2"></i>
       {{'header.shipping' | translate}}
       <span class="fs-6 text fw-bold">&nbsp;500&nbsp;
@@ -18,7 +18,7 @@
         <i class="fa fa-brands fa-whatsapp" id="whatsapp"></i>
         {{'header.whatsapp' | translate}}
       </a>
-      <a class="nav-link align-items-center d-flex gap-2"[ngClass]="{'arabic': isArabic}" href="#">
+      <a class="nav-link align-items-center d-flex gap-2"[ngClass]="{'arabic': isArabic}">
         <i class="material-icons fs-5">storefront</i>
         {{'header.stores' | translate}}
       </a>
@@ -49,14 +49,14 @@
       @else{
         <button type="button" class="btn btn-primary custom-button" routerLink="/account">
           <i class="fa-solid fa-user button-icon"></i>
-          Account
+          {{'header.account' | translate}}
         </button>
         <button type="button" class="btn btn-primary custom-button" routerLink="/wishlist">
           <i class="fa-solid fa-heart me-2 text-black"></i>
-          Wishlist
+          {{'header.wishlist' | translate}}
         </button>
       }
-      <button type="button" class="btn btn-primary custom-button">
+      <button type="button" class="btn btn-primary custom-button" routerLink="/cart">
         <i class="fa-solid fa-cart-shopping button-icon"></i>
         {{'header.shoppingCart' | translate}}<span class="fs-6 text fw-medium px-2"> ({{ cartCount }})</span>
       </button>

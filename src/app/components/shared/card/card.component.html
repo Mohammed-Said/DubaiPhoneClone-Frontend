@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="card-btn">
-      <a [routerLink]="['/product/'+ product.name.split(' ').join('-')]" [state]="{id:product.id}" routerLinkActive="router-link-active" >
+      <a [routerLink]="['/product/'+ product.name.split(' ').join('-')]" [state]="{id:product.id}" >
         <img class="d-block" src="assets/Images/cart.svg" alt="cart" />
         <span>{{'card.btn' | translate}}</span>
       </a>

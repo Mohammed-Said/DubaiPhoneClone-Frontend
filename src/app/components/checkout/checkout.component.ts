@@ -4,7 +4,7 @@ import { CartService } from '../../Services/cartServices/cart.service';
 import { IProductCart } from '../../Models/CartItem/iproduct-cart';
 import { PaymentComponent } from "./payment/payment.component";
 import { ShippingComponent } from "./shipping/shipping.component";
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { OrderService } from '../../Services/OrderService/order.service';
 import { ICreateOrder } from '../../Models/Order/ICreateOrder';
@@ -14,22 +14,22 @@ import { ICreateOrder } from '../../Models/Order/ICreateOrder';
     standalone: true,
     templateUrl: './checkout.component.html',
     styleUrl: './checkout.component.css',
-    imports: [CommonModule, PaymentComponent, ShippingComponent,RouterOutlet]
+    imports: [CommonModule, PaymentComponent, ShippingComponent,RouterOutlet,RouterModule]
 })
 export class CheckoutComponent {
   cart:IProductCart[]=[];
   home:boolean=true;
   totalPrice:number=0;
   order:ICreateOrder={
-    firstName:'',
-    lastName:'',
-    phone:'',
-    emailAddress:'',
-    address:'',
-    city:'',
+    firstName:' ',
+    lastName:' ',
+    phone:' ',
+    emailAddress:' ',
+    address:' ',
+    city:' ',
     shippingMethod:'HomeDelivery',
-    userId:'',
-    transactionId:'',
+    userId:' ',
+    transactionId:' ',
     totalPrice:0
   };
   constructor(private _cartService: CartService,private _orderService: OrderService) {

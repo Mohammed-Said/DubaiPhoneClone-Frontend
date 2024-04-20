@@ -1,4 +1,4 @@
-<section class="mt-4">
+<section [hidden]="isArabic" class="mt-4">
   <div class="container">
     <nav
       style="--bs-breadcrumb-divider: '>'"
@@ -11,7 +11,7 @@
             [routerLink]="['']"
             routerLinkActive="router-link-active"
             class="text-dark text-decoration-none"
-            >Home</a
+            >{{'productsPage.home' | translate}}</a
           >
         </li>
         @if (firstPartUrl===undefined) {
@@ -55,7 +55,7 @@
     </nav>
   </div>
 </section>
-<main class="pt-1">
+<main class="pt-1" >
   <div class="page-header fs-2">
     @if(mainUrl==='brand') {
       <app-categories [Categories]="categories"></app-categories>
@@ -64,49 +64,49 @@
       <app-brands [isSmall]="true" [brands]="brands"></app-brands>
     }
   </div>
-  <div class="container mx-auto mt-5">
+  <div class="container mx-auto mt-5" [dir]="isArabic?'rtl':'ltr'">
     <div class="page-grid pt-5">
       <div class="filters">
-        <h2>Filter By</h2>
+        <h2>{{'productsPage.filter' | translate}}</h2>
         <div class="stock-filter py-5">
-          <h3>Stock Status</h3>
+          <h3>{{'productsPage.stock.Status' | translate}}</h3>
           <mat-radio-group aria-label="Select an option">
-            <mat-radio-button  value="1">Show All</mat-radio-button>
-            <mat-radio-button class="d-flex align-items-center "  value="2">In Stock <span class="fa-xs"> ({{stock}})</span></mat-radio-button>
+            <mat-radio-button checked  (click)="loadData()" value="1">{{'productsPage.stock.all' | translate}}</mat-radio-button>
+            <mat-radio-button  class="d-flex align-items-center "  value="2" (click)="filterByStock()">{{'productsPage.stock.in' | translate}} <span class="fa-xs"> ({{stock}})</span></mat-radio-button>
           </mat-radio-group>
         </div>
-        <div class="price-filter">
-          <h3>Price</h3>
-          <mat-slider min="0" max="500" class="w-100">
-            <input value="300" matSliderStartThumb #min />
-            <input value="400" matSliderEndThumb #max />
+        <div class="price-filter" >
+          <h3>{{'productsPage.price' | translate}}</h3>
+          <mat-slider [min]="minPrice" [max]="maxPrice" class="w-100">
+            <input value="{{minPrice}}" matSliderStartThumb #minRef  (change)="filterByPrice()" />
+            <input value="{{maxPrice}}" matSliderEndThumb #maxRef (change)="filterByPrice()" />
           </mat-slider>
           <div class="d-flex slider-input gx-3 mt-4">
-            <input class="mr-3" type="number" [(value)]="min.value" />
-            <input type="number" [(value)]="max.value" />
+            <input class="mr-3" type="number" [(value)]="minRef.value"(change)="filterByPrice()" />
+            <input type="number" [(value)]="maxRef.value" (change)="filterByPrice()"/>
           </div>
           <div class="range-label mt-4">
-            <span>Price:</span>
-            <span>{{ min.value }}</span>
-            <span> EGP - </span>
-            <span>{{ max.value }}</span>
-            <span> EGP</span>
+            <span>{{'productsPage.price' | translate}}:</span>
+            <span>{{ minRef.value }}</span>
+            <span> {{'currency' | translate}} - </span>
+            <span>{{ maxRef.value }}</span>
+            <span> {{'currency' | translate}}</span>
           </div>
         </div>
-        <div class="filter">
+        <!-- <div class="filter">
           <h3>Brands</h3>
           <div class="checkBoxs">
             <mat-checkbox color="primary" class="example-margin"
               >Check me!</mat-checkbox
             >
           </div>
-        </div>
+        </div> -->
       </div>
       <div>
         <div class="d-flex justify-content-between align-items-center">
-          <p class="m-0">Showing {{(itemPerPage * (currentPage - 1) )+1}} – {{(itemPerPage * currentPage)>count?count:(itemPerPage * currentPage) }} of {{count}} results</p>
+          <p class="m-0">{{'productsPage.home' | translate}} {{(itemPerPage * (currentPage - 1) )+1}} – {{(itemPerPage * currentPage)>count?count:(itemPerPage * currentPage) }} {{'productsPage.of' | translate}} {{count}} {{'productsPage.result' | translate}}</p>
           <div class="d-flex justify-content-between align-items-center">
-            <div class="img-icon me-3" (click)="handleGrid($event)">
+            <div class="img-icon mx-3" (click)="handleGrid($event)">
               <img
                 src="assets/Images/filter.svg"
                 alt="filter-icon"
@@ -114,12 +114,12 @@
               />
             </div>
             <p-dropdown
-              [options]="sorts"
+              [options]="isArabic ? sortsAR:sorts"
               optionLabel="name"
               [(ngModel)]="selectedSort"
               [showClear]="true"
-              placeholder="Sort By"
-              (onChange)="SortBy(selectedSort)"
+              placeholder="{{'productsPage.sort' | translate}}"
+              (onChange)="OrderBy(selectedSort)"
             >
             </p-dropdown>
           </div>
