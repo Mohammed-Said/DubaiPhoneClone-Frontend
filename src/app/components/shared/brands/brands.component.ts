@@ -16,6 +16,7 @@ import { LocalizationService } from '../../../Services/localiztionService/locali
 export class BrandsComponent {
   @Input() brands: IBrand[]=[] ;
   @Input() isSmall=false;
+  @Input() showTitle=true;
   numOfBrands!: number;
 
   isArabic!: boolean;

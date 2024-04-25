@@ -19,7 +19,6 @@ export class WishlistComponent implements OnInit ,OnChanges {
 
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log((this.container?.nativeElement as HTMLElement).childElementCount);
     if ((this.container?.nativeElement as HTMLElement).childElementCount===0) {
       this.products=[];
     }

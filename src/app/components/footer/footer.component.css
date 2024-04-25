@@ -121,3 +121,18 @@ svg {
 .between {
   margin-top: 25px;
 }
+
+.arabic
+{
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.arabictext{
+  direction: rtl;
+
+}
+
+.arabicposation{
+  position: left;
+}

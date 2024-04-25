@@ -11,8 +11,7 @@ export const usergardGuard: CanActivateFn = (route, state) => {
     return true
   }
   else{
-    alert("please login first")
-    router.navigate(["login"])
+    router.navigate(["/login"])
     return false
   }
 };

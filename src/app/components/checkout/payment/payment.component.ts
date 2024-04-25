@@ -2,11 +2,12 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { OrderService } from '../../../Services/OrderService/order.service';
 import { Router, RouterModule } from '@angular/router';
 import { ICreateOrder } from '../../../Models/Order/ICreateOrder';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,TranslateModule],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
@@ -17,10 +18,10 @@ order!:ICreateOrder;
 constructor(private _orderService:OrderService,
   private router:Router
 ) {
- if(_orderService.order.address ==='')
+ if(_orderService.order.address ===' ')
   router.navigate(['checkout']);
+
  this.order=_orderService.order;
- console.log(this.order);
 }
 
 ngOnInit(): void {
@@ -40,6 +41,7 @@ ngOnInit(): void {
       if (details.status === 'COMPLETED') {
         this.order.transactionId = details.id;
         this._orderService.CreateOrder(this.order);
+        this.router.navigate(['/orderPlaced']);
       }
     });
   },

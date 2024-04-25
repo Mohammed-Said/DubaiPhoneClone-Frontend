@@ -1,3 +1,3 @@
 export const environment = {
-    serverURL:"https://localhost:7107"
+    serverURL:"https://dubaiphone.runasp.net"
 };

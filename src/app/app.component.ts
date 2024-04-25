@@ -26,7 +26,7 @@ export class AppComponent {
     translate.use(lang as string);
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        if (val.url==='/checkout')
+        if (val.url.includes( '/checkout'))
           this.showHeader=false;
         else
         this.showHeader=true;

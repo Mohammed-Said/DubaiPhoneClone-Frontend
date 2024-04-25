@@ -138,8 +138,16 @@ export class ProductService {
     });
   }
   //////////////////////////////////////////////////////////////////////////////////////////
-  getProductsByName(name: string): Observable<IProduct[]> {
-    return this.httpClient.get<IProduct[]>(this.URL + '/search/' + name);
+  getProductsByName(name: string,URLurlParams: IPagination): Observable<IProduct[]> {
+    let urlParams = new HttpParams();
+
+    urlParams = urlParams
+      .append('numOfProductPerPage', URLurlParams.numOfProductPerPage)
+      .append('pageNumber', URLurlParams.pageNumber);
+
+    return this.httpClient.get<IProduct[]>(this.URL + '/' + name,{
+      params: urlParams,
+    });
   }
 
   getProductByID(id: number): Observable<IProductDetails> {

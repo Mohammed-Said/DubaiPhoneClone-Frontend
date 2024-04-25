@@ -11,9 +11,13 @@ body {
 }
 :root{
   --main-color:#2B7AB9;
+  --main-bg-color:#2B7AB9;
 }
 .main-color{
   color: var(--main-color);
+}
+.main-bg-color{
+  background-color: var(--main-bg-color);
 }
 html,
 body {
@@ -55,4 +59,7 @@ p-galleria .p-galleria-item-next{
 }
 .p-image-preview-container:hover{
 background-color: #fff;
+}
+.p-sidebar-right {
+  width: 30rem;
 }

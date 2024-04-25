@@ -17,7 +17,6 @@ constructor(private formbuilder:FormBuilder){
 this.loginform=new FormGroup({
   Email:new FormControl("",[Validators.required,Validators.email])
 })
-console.log(this.loginform.value);
 
 
 }
@@ -26,8 +25,7 @@ get email(){
 }
 
 save(form:FormGroup){
-  console.log((form.value));
-  
+
 }
 
 }

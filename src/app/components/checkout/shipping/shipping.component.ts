@@ -9,12 +9,13 @@ import {
 import { Router } from '@angular/router';
 import { ICreateOrder } from '../../../Models/Order/ICreateOrder';
 import { OrderService } from '../../../Services/OrderService/order.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-shipping',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,TranslateModule],
   templateUrl: './shipping.component.html',
   styleUrl: './shipping.component.css',
 })
