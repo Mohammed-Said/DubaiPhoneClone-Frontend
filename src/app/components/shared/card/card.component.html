@@ -1,4 +1,4 @@
-<div class="prdCard" [ngClass]="{'grid-one': isGridOne,'arabic': isArabic}" #cardRef>
+<div class="prdCard" [ngClass]="{'grid-one': isGridOne,'arabic': isArabic}" #cardRef [dir]="isArabic?'rtl':'ltr'">
   @if (isWishlist) {
   <div class="card-wish" (click)="removeFromWishlist()">
     <i class="fa-solid fa-heart"></i>
@@ -24,7 +24,7 @@
       }
     </p>
     <div class="d-flex flex-column g-1" >
-      <div class="price d-flex " [ngClass]="{'flex-row-reverse':isArabic}">
+      <div class="price d-flex " >
         <ins class="highlight" >
           <span class="amount">
             <bdi>{{product.salePrice | number :'3.0-0'}}

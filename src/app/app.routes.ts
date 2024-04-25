@@ -20,35 +20,54 @@ import { MywishlistComponent } from './components/account/mywishlist/mywishlist.
 import { CouponsComponent } from './components/account/coupons/coupons.component';
 import { AddressesComponent } from './components/account/addresses/addresses.component';
 import { AccountDetailsComponent } from './components/account/account-details/account-details.component';
+import { usergardGuard } from './guard/usergard.guard';
+import { OrderPlacedComponent } from './components/checkout/order-placed/order-placed.component';
 
 export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'sign up', component: SignupComponent, title: 'sign up' },
+  { path: 'login', component: LoginComponent, title: 'login' },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [usergardGuard],
+    children: [
+      { path: '', component: ShippingComponent },
+      { path: 'payment', component: PaymentComponent },
+    ],
+  },
+  { path: 'orderPlaced', component: OrderPlacedComponent ,canActivate: [usergardGuard],},
+  { path: 'cart', component: CartComponent },
+  {
+    path: 'category',
+    component: ProductsPageComponent,
+    children: [
+      { path: ':category', component: ProductsPageComponent },
+      { path: ':category/:brand', component: ProductsPageComponent },
+    ],
+  },
+  {
+    path: 'brand',
+    component: ProductsPageComponent,
+    children: [{ path: ':brand', component: ProductsPageComponent }],
+  },
+  { path: 'product/:name', component: ProductDetailsComponent },
+  { path: 'search', component: ProductsPageComponent },
+  { path: 'wishlist', component: WishlistComponent },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [usergardGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'orders', component: OrdersComponent },
+      { path: 'my-wishlist', component: WishlistComponent },
+      { path: 'coupons', component: CouponsComponent },
+      { path: 'edit-address', component: AddressesComponent },
+      { path: 'edit-account', component: AccountDetailsComponent },
+    ],
+  },
 
-    {path:"",component:HomeComponent},
-    {path:"sign up",component:SignupComponent,title:"sign up"},
-    {path:"login",component:LoginComponent,title:"login"},
-    {path:"checkout",component:CheckoutComponent,children:[
-      {path:"",component:ShippingComponent},
-      {path:"payment",component:PaymentComponent},
-    ]},
-    {path:"cart",component:CartComponent},
-    {path:"category" ,component:ProductsPageComponent,children:[
-      {path:":category",component:ProductsPageComponent},
-      {path:":category/:brand",component:ProductsPageComponent},
-    ]},
-    {path:"brand",component:ProductsPageComponent,children:[
-      {path:":brand",component:ProductsPageComponent},
-    ]},
-    {path:"product/:name",component:ProductDetailsComponent},
-    {path:"wishlist",component:WishlistComponent},
-    {path:"account",component:AccountComponent,children:[
-      {path:"dashboard",component:DashboardComponent},
-      {path:"orders",component:OrdersComponent},
-      {path:"my-wishlist",component:WishlistComponent},
-      {path:"coupons",component:CouponsComponent},
-      {path:"edit-address",component:AddressesComponent},
-      {path:"edit-account",component:AccountDetailsComponent},
-    ]},
-
-    {path:"not-found",component:NotFoundComponent},
-    {path:"**",redirectTo:"not-found"}
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found' },
 ];

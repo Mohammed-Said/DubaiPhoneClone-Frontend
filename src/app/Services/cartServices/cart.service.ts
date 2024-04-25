@@ -4,11 +4,13 @@ import { ICartItem } from '../../Models/CartItem/icart-item';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { IProductCart } from '../../Models/CartItem/iproduct-cart';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private cartCount: BehaviorSubject<ICartItem[]>;
   private URL!: string;
   private cart: ICartItem[] = [];
   constructor(
@@ -20,6 +22,9 @@ export class CartService {
       this.cart = JSON.parse(localStorage.getItem('cart') as string);
     if (_userService.userState)
       this.getUserCart(_userService.User?.nameidentifier as string);
+
+    this.cartCount = new BehaviorSubject<ICartItem[]>(this.cart);
+
   }
 
   addToCart(id: number) {
@@ -45,6 +50,7 @@ export class CartService {
     this.addCartToMemory();
   }
   private addCartToMemory() {
+    this.cartCount.next(this.cart);
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
   private addCartToApi(item: ICartItem) {
@@ -93,7 +99,6 @@ export class CartService {
     });
   }
   updateCart(id: number, quantity: number) {
-    console.log(quantity);
     let indexProdInCart = this.cart.findIndex((val) => val.productId === id);
     if (indexProdInCart !== -1) {
       let cartItem: ICartItem = this.cart[indexProdInCart];
@@ -107,5 +112,9 @@ export class CartService {
       }
       this.addCartToMemory();
     }
+  }
+
+  getCartCount() {
+    return this.cartCount.asObservable();
   }
 }

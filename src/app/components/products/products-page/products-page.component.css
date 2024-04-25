@@ -67,7 +67,17 @@ mat-radio-button{
   text-align: right;
 }
 
-
+.empty{
+  margin-bottom: 20px;
+    margin-left: 0;
+    padding: 1em 1.618em;
+    border-left: 0.6180469716em solid rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    color: #fff;
+    background-color: #3d9cd2;
+    height: fit-content;
+    font-size: 14px;
+}
 
 .loader {
   width: 12px;

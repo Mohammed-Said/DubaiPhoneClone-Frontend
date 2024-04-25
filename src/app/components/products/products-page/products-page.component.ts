@@ -10,7 +10,7 @@ import {
 import { DropdownModule } from 'primeng/dropdown';
 import { CardComponent } from '../../shared/card/card.component';
 import { BrandsComponent } from '../../shared/brands/brands.component';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 
 import { IBrand } from '../../../Models/ibrand';
 
@@ -46,7 +46,7 @@ import { LocalizationService } from '../../../Services/localiztionService/locali
     MatRadioModule,
     MatSliderModule,
     MatCheckboxModule,
-    TranslateModule
+    TranslateModule,
   ],
 })
 export class ProductsPageComponent implements OnInit, AfterViewInit {
@@ -86,12 +86,16 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
   minPrice!: number;
   maxPrice!: number;
 
-  isArabic!: boolean ;
+  isArabic!: boolean;
 
   isFilterPrice: boolean = false;
   isFilterStock: boolean = false;
 
   isOrderBy: boolean = false;
+  isSearch: boolean = false;
+  showBreadcrumbs: boolean = true;
+
+  searchResult: string = '';
   criteria!: string;
   way!: string;
   toggleIsLoading = () => (this.isLoading = !this.isLoading);
@@ -102,8 +106,9 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
     private _brandService: BrandService,
     private _categoryService: CategoryService,
     private _productService: ProductService,
-    private localizationService: LocalizationService ) {
-      this.localizationService.IsArabic.subscribe(ar=>this.isArabic=ar);
+    private localizationService: LocalizationService
+  ) {
+    this.localizationService.IsArabic.subscribe((ar) => (this.isArabic = ar));
   }
   ngAfterViewInit(): void {
     const observer = new IntersectionObserver((entries) => {
@@ -124,10 +129,10 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
 
     this.itemPerPage = 6;
     this.currentPage = 1;
-
   }
 
   ngOnInit() {
+
 
     this._productService.getMinPrice().subscribe((p) => (this.minPrice = p));
     this._productService.getMaxPrice().subscribe((p) => (this.maxPrice = p));
@@ -136,26 +141,26 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
     this.firstPartUrl = this.router.url.split('/')[2];
     this.SecondPartUrl = this.router.url.split('/')[3];
 
+    this._productService.getMinPrice().subscribe((p) => (this.minPrice = p));
+    this._productService.getMaxPrice().subscribe((p) => (this.maxPrice = p));
     //
 
     //Load the Data
     this.loadData();
-
-    //Handle Route
-    if (this.mainUrl === 'category') {
-      this._brandService.getBrands().subscribe({
-        next: (brands) => {
-          this.brands = brands;
-        },
-      });
-      this.routeCategoryCheck();
-    } else if (this.mainUrl === 'brand') {
+    if (this.mainUrl === 'brand') {
       this._categoryService.getAllBrands().subscribe({
         next: (categories) => {
           this.categories = categories;
         },
       });
-      this.routeBrandCheck();
+       this.routeBrandCheck();
+    } else {
+      this._brandService.getBrands().subscribe({
+        next: (brands) => {
+          this.brands = brands;
+        },
+      });
+       if (!this.isSearch) this.routeCategoryCheck();
     }
   }
 
@@ -227,6 +232,7 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
     }
   }
   OrderBy(test: any) {
+
     this.ngAfterViewInit();
     let criteria = '';
     let way = '';
@@ -273,8 +279,6 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
           this.toggleIsLoading();
         },
       });
-    console.log(this.maxPageNumber);
-    console.log(this.currentPage);
   }
   ///////////////////////////////////////////////////////////////
   //filter
@@ -295,12 +299,10 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
       .pipe(delay(2000))
       .subscribe({
         next: (data: any) => {
-          console.log(data);
           this.products = data.entity;
           this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
           this.count = data.count;
           this.stock = data.stock;
-          console.log(this.products);
         },
         error: (error) => {
           console.log(error.message);
@@ -326,7 +328,6 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
       .pipe(delay(2000))
       .subscribe({
         next: (data: any) => {
-          console.log(data);
           this.products = data.entity;
           this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
           this.count = data.count;
@@ -353,20 +354,39 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
       numOfProductPerPage: this.itemPerPage,
       pageNumber: this.currentPage,
     };
-    this._productService.getProductsPagination(URLparams).subscribe({
-      next: (data: any) => {
-        this.products = data.entity;
-        this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
-        this.count = data.count;
-        this.stock = data.stock;
-      },
-      error: (error) => {
-        console.log(error.message);
-      },
-      complete: () => {
-        this.toggleIsLoading();
-      },
-    });
+    if (this.router.url.includes('search')) {
+      this.searchResult = history.state['searchResult'];
+      this._productService.getProductsByName(this.searchResult, URLparams).subscribe({
+        next: (data: any) => {
+          this.products = data.entity;
+          this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
+          this.count = data.count;
+          this.stock = data.stock;
+        },
+        error: (error) => {
+          console.log(error.message);
+        },
+        complete: () => {
+          this.toggleIsLoading();
+        },
+      });
+      this.showBreadcrumbs = false;
+      this.isSearch = true;
+    } else
+      this._productService.getProductsPagination(URLparams).subscribe({
+        next: (data: any) => {
+          this.products = data.entity;
+          this.maxPageNumber = Math.ceil(data.count / this.itemPerPage);
+          this.count = data.count;
+          this.stock = data.stock;
+        },
+        error: (error) => {
+          console.log(error.message);
+        },
+        complete: () => {
+          this.toggleIsLoading();
+        },
+      });
   }
   appendData() {
     this.toggleIsLoading();
@@ -413,8 +433,22 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
         .subscribe({
           next: (data: any) => {
             this.products = [...this.products, ...data.entity];
-            console.log(this.maxPageNumber);
-            console.log(this.currentPage);
+          },
+          error: (error) => {
+            console.log(error.message);
+          },
+          complete: () => {
+            this.toggleIsLoading();
+          },
+        });
+    } else if (this.isSearch) {
+      const res = history.state['searchResult'];
+      this._productService
+        .getProductsByName(res, URLparams)
+        .pipe(delay(2000))
+        .subscribe({
+          next: (data: any) => {
+            this.products = [...this.products, ...data.entity];
           },
           error: (error) => {
             console.log(error.message);
@@ -441,7 +475,9 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
     }
   }
   onScroll() {
-    this.currentPage++;
-    this.appendData();
+    if (this.currentPage!=this.maxPageNumber) {
+      this.currentPage++;
+      this.appendData();
+    }
   }
 }

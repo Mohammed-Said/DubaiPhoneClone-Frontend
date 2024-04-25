@@ -1,9 +1,10 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../Services/userService/user.service';
 import { LocalizationService } from '../../Services/localiztionService/localization.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CartService } from '../../Services/cartServices/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -103,8 +104,11 @@ export class HeaderComponent implements AfterViewInit {
   btns!: NodeListOf<HTMLElement>;
   isLoggedIn: boolean = false;
   isArabic!: boolean ;
+  @ViewChild('searchRef') searchRef!:ElementRef;
 constructor(
   private userService: UserService,
+  private cartService: CartService,
+  private router: Router,
   private localizationService: LocalizationService ) {
     this.localizationService.IsArabic.subscribe(ar=>this.isArabic=ar);
 
@@ -114,6 +118,12 @@ ngOnInit() {
   .then(json => {
     this.navData = json.nav;
   });
+  this.cartService.getCartCount().subscribe(cart=>{
+    this.cartCount=0;
+    cart.forEach(c =>{
+      this.cartCount+=c.quantity;
+    } )
+  })
 }
   ngAfterViewInit(): void {
   this.userService.UserLoggedIn.subscribe(d=>this.isLoggedIn=d);
@@ -141,7 +151,8 @@ ngOnInit() {
   }
   useLanguage(){
     this.localizationService.ChangeLanguage();
-
-
+  }
+  search(res:string){
+    this.router.navigateByUrl('/search',{state:{ searchResult: res }});
   }
 }

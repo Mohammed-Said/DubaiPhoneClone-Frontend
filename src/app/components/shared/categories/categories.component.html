@@ -25,7 +25,7 @@
     [autoplayInterval]="5000">
     <ng-template let-cat pTemplate="item">
       <li class="list-unstyled item text-center">
-        <a [routerLink]="['category/'+cat.name.split(' ').join('').toLowerCase()]" routerLinkActive="router-link-active"
+        <a [routerLink]="['/category/'+cat.name.split(' ').join('').toLowerCase()]"
           draggable="false">
           <img draggable="false" src="/assets/Images/Categories/{{ cat.imagePath }}" [alt]="cat.name" class="w-75" />
           <span class="d-block">

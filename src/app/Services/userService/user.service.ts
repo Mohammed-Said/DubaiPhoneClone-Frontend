@@ -28,7 +28,6 @@ export class UserService {
 
     if (this.userState) {
       this.user=jwtService.decodeToken(localStorage.getItem('token') as string);
-      console.log(this.user);
     }
   }
 
@@ -63,8 +62,6 @@ export class UserService {
     this.isUserLoggedIn.next(false);
   }
   registration(user: ICreatingUser) {
-    // debugger;
-    console.log(this.AccountURL + '/SignUp', user);
     this.httpClient
       .post<ICreatingUser>(this.AccountURL + '/SignUp', user)
       .subscribe({

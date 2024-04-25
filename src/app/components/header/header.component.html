@@ -23,7 +23,7 @@
         {{'header.stores' | translate}}
       </a>
 
-      <a class="nav-link align-items-center d-flex gap-2 lang-btn py-0" (click)="useLanguage()">
+      <a class="nav-link align-items-center d-flex gap-2 lang-btn py-0" style="cursor: pointer;" (click)="useLanguage()">
         {{'language' | translate}}
       </a>
     </div>
@@ -36,7 +36,7 @@
     </a>
     <div class="search-bar s">
       <i class="fa fa-search" id="search"></i>
-      <input type="text" placeholder="{{'header.placeholder' | translate}}" [ngClass]="{'arabic': isArabic}" />
+      <input #searchRef type="text" placeholder="{{'header.placeholder' | translate}}" [ngClass]="{'arabic': isArabic}" (keyup.enter)="search(searchRef.value)" />
     </div>
     <div class="btns d-flex gap-4" [ngClass]="{'arabic': isArabic}">
       @if(!isLoggedIn){
@@ -79,7 +79,16 @@
         <div class="">
           <h4 class="fw-semibold">{{'nav.subTitles.title1' | translate}}</h4>
           <ul class="list-unstyled">
-
+            <li class="p-2">
+              <a
+                class="nav-link"
+                [routerLink]="['/category/mobile/samsung']"
+                routerLinkActive="router-link-active" (click)="closeMenu()"
+                >
+                {{'nav.mobiles.samsung'| translate}}
+                </a
+              >
+            </li>
             @for (item of navData?.mobiles | keyvalue; track $index) {
             <li class="p-2">
               <a

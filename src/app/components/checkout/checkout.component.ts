@@ -5,16 +5,17 @@ import { IProductCart } from '../../Models/CartItem/iproduct-cart';
 import { PaymentComponent } from "./payment/payment.component";
 import { ShippingComponent } from "./shipping/shipping.component";
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { OrderService } from '../../Services/OrderService/order.service';
 import { ICreateOrder } from '../../Models/Order/ICreateOrder';
+import { TranslateModule } from '@ngx-translate/core';
+import { LocalizationService } from '../../Services/localiztionService/localization.service';
 
 @Component({
     selector: 'app-checkout',
     standalone: true,
     templateUrl: './checkout.component.html',
     styleUrl: './checkout.component.css',
-    imports: [CommonModule, PaymentComponent, ShippingComponent,RouterOutlet,RouterModule]
+    imports: [CommonModule, PaymentComponent, ShippingComponent,RouterOutlet,RouterModule,TranslateModule]
 })
 export class CheckoutComponent {
   cart:IProductCart[]=[];
@@ -32,7 +33,12 @@ export class CheckoutComponent {
     transactionId:' ',
     totalPrice:0
   };
-  constructor(private _cartService: CartService,private _orderService: OrderService) {
+
+  isArabic!: boolean ;
+
+  constructor(private _cartService: CartService,private _orderService: OrderService,
+    private localizationService: LocalizationService ) {
+    this.localizationService.IsArabic.subscribe(ar=>this.isArabic=ar);
     _orderService.order=this.order;
     _cartService.getCartProducts().subscribe(products => {
       this.cart = products;
@@ -52,4 +58,7 @@ export class CheckoutComponent {
     this.home = res;
   }
 
+  useLanguage(){
+    this.localizationService.ChangeLanguage();
+  }
 }

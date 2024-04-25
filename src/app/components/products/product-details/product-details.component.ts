@@ -12,7 +12,10 @@ import { SidebarModule } from 'primeng/sidebar';
 import { IProductDetails } from '../../../Models/product/iproduct-details';
 import { CartService } from '../../../Services/cartServices/cart.service';
 import { IProductCart } from '../../../Models/CartItem/iproduct-cart';
-import { PanelComponent } from './panel/panel.component';
+import { PanelComponent } from '../../shared/panel/panel.component';
+import { LocalizationService } from '../../../Services/localiztionService/localization.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { WishlistService } from '../../../Services/wishlistService/wishlist.service';
 
 @Component({
   selector: 'app-product-details',
@@ -25,14 +28,15 @@ import { PanelComponent } from './panel/panel.component';
     GalleriaModule,
     ImageModule,
     SidebarModule,
-    PanelComponent
+    PanelComponent,
+    TranslateModule
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
 })
 export class ProductDetailsComponent {
   showSideCart: boolean = false;
-
+  cartCount:number = 0;
   public product!: IProductDetails;
   public itemId?: number;
   public quantity?: number;
@@ -45,11 +49,24 @@ export class ProductDetailsComponent {
   sidebarVisible2: boolean = false;
   sidebarVisible3: boolean = false;
   cartitemnum:number=this.cart.length;
+  isArabic!: boolean ;
   constructor(
     private _productService: ProductService,
     private route: Router,
-    private _cartService: CartService
-  ) {}
+    private _cartService: CartService,
+    private localizationService: LocalizationService,
+   private  _wishlistService: WishlistService
+  ) {
+    this.localizationService.IsArabic.subscribe(ar=>this.isArabic=ar);
+
+    this._cartService.getCartCount().subscribe(cart=>{
+      this.cartCount=0;
+      cart.forEach(c =>{
+        this.cartCount+=c.quantity;
+      } )
+    })
+
+  }
 
   ngOnInit(): void {
     const id = history.state['id'];
@@ -75,6 +92,7 @@ export class ProductDetailsComponent {
     document
       .getElementById('hart')
       ?.classList.replace('bi-heart', 'bi-heart-fill');
+    this._wishlistService.updateWishlist(this.product.id);
   }
 
   public addtocart() {
@@ -82,7 +100,6 @@ export class ProductDetailsComponent {
      this.getcart() // Show sidebar
   }
   public getcart(){
-    this.sidebarVisible1 = true;
     this._cartService.getCartProducts().subscribe(products => {
       this.cart = products;
       this._cartService.AddQuantity(this.cart);
@@ -92,6 +109,7 @@ export class ProductDetailsComponent {
           this.fakeTotal+= item.normalPrice * item.quantity
         }
       )
+      this.sidebarVisible1 = true;
     });
 
 
@@ -102,10 +120,22 @@ export class ProductDetailsComponent {
   }
   createRange(number:number){
     // return new Array(number);
+    if (number >= 5) {
+      number=5
+    }
     return new Array(number);
   }
 
-  deletecart(id:number){
-    this._cartService.updateCart(id,0);
+  deletecart(e:Event,id:number){
+     (e.target as HTMLElement).closest('.item')?.remove();
+    this._cartService.updateCart(id, 0);
+  }
+  useLanguage(){
+    this.localizationService.ChangeLanguage();
+  }
+  changeQuantity(e: Event, id: number) {
+    let quantity = (e.target as HTMLSelectElement).selectedIndex + 1;
+    console.log(quantity);
+    this._cartService.updateCart(id, quantity);
   }
 }

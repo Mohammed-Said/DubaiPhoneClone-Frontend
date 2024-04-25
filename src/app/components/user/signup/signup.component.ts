@@ -22,7 +22,6 @@ constructor(formbilder:FormBuilder,private userService:UserService,private route
     Email:new FormControl("",[Validators.required]),
     Password:new FormControl("",[Validators.required])
   })
-  console.log(this.signform.value);
 
 }
 get UserName(){
@@ -35,11 +34,9 @@ get Password(){
   return this.signform.get('Password')?.value;
 }
 save(form:FormGroup){
-  console.log(form.value);
 }
 signup(){
   let user:ICreatingUser={email:this.Email, password:this.Password,username:this.UserName}
-  console.log(user);
   this.userService.registration(user);
   // this.router.navigate(['/']);
 }
